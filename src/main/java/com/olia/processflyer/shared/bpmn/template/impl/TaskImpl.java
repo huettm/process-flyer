@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
+import com.olia.processflyer.shared.bpmn.template.NodeElementType;
 import com.olia.processflyer.shared.bpmn.template.element.Task;
 import com.olia.processflyer.shared.bpmn.template.element.TaskType;
 
@@ -40,5 +41,11 @@ public class TaskImpl extends AbstractBaseNode<TaskType> implements Task
     {
         this.name = name;
     }
+
+	@Override
+	public NodeElementType getElementType() {
+
+		return NodeElementType.Task;
+	}
 
 }

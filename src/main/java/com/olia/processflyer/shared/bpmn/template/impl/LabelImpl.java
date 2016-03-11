@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
+import com.olia.processflyer.shared.bpmn.template.NodeElementType;
 import com.olia.processflyer.shared.bpmn.template.element.Label;
 import com.olia.processflyer.shared.bpmn.template.element.LabelType;
 
@@ -40,5 +41,10 @@ public class LabelImpl extends AbstractBaseNode<LabelType> implements Label
     {
         return text;
     }
+    @Override
+	public NodeElementType getElementType() {
+
+		return NodeElementType.Label;
+	}
 
 }

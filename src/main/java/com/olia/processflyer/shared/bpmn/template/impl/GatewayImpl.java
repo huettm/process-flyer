@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
+import com.olia.processflyer.shared.bpmn.template.NodeElementType;
 import com.olia.processflyer.shared.bpmn.template.element.Gateway;
 import com.olia.processflyer.shared.bpmn.template.element.GatewayType;
 
@@ -27,5 +28,11 @@ public class GatewayImpl extends AbstractBaseNode<GatewayType> implements Gatewa
     {
         super();
     }
+    
+    @Override
+	public NodeElementType getElementType() {
+
+		return NodeElementType.Gateway;
+	}
 
 }

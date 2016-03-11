@@ -20,10 +20,13 @@ import thothbot.parallax.core.shared.math.Vector2;
 import thothbot.parallax.core.shared.math.Vector3;
 import thothbot.parallax.core.shared.objects.Mesh;
 
+import java.util.Collection;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.olia.processflyer.shared.SceneUpdaterService;
 import com.olia.processflyer.shared.SceneUpdaterServiceAsync;
+import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceImpl;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 /**
  *
@@ -41,15 +44,15 @@ public class MyScene extends AnimatedScene {
     
     private SceneUpdaterServiceAsync sceneUpdater;
 
-//    AsyncCallback<Collection<ProcessInstanceImpl>> callback = new AsyncCallback<Collection<ProcessInstanceImpl>>() {
-//        public void onFailure(Throwable caught) {
-//          // TODO: Do something with errors.
-//        }
-//
-//        public void onSuccess(Collection<ProcessInstance> result) {
-//          updateTable(result);
-//        }
-//      };
+    AsyncCallback<Collection<ProcessInstanceImpl>> callback = new AsyncCallback<Collection<ProcessInstanceImpl>>() {
+        public void onFailure(Throwable caught) {
+          // TODO: Do something with errors.
+        }
+
+        public void onSuccess(Collection<ProcessInstanceImpl> result) {
+          ;
+        }
+      };
       
     @Override
     protected void onStart() {
@@ -57,6 +60,8 @@ public class MyScene extends AnimatedScene {
     	if(sceneUpdater==null) {
     		sceneUpdater=GWT.create(SceneUpdaterService.class);
     	}
+    	sceneUpdater.getProcessInstances(callback);
+    	
         // Loads default camera for the Animation
         camera = new PerspectiveCamera(
                 100, // field of view

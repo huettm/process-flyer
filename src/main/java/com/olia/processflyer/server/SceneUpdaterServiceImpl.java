@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
-import com.olia.processfly.bpmn.model.hackathon.HackathonDungleMock;
-import com.olia.processfly.bpmn.model.hackathon.HackathonProcessMock;
 import com.olia.processflyer.client.SceneUpdaterService;
 import com.olia.processflyer.shared.bpmn.instance.InstanceStatus;
 import com.olia.processflyer.shared.bpmn.instance.NodeInstance;

@@ -1,3 +1,4 @@
+
 /* Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -12,15 +13,16 @@
  */
 package com.olia.processflyer.server;
 
-import static org.mockito.Mockito.mock;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.olia.processflyer.shared.bpmn.instance.InstanceStatus;
+import com.olia.processflyer.shared.bpmn.instance.NodeInstance;
 import com.olia.processflyer.shared.bpmn.instance.ProcessInstance;
 import com.olia.processflyer.shared.bpmn.instance.impl.ApplyStatusToNodeInstanceCommand;
 import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceFactory;
+import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceStatusResolver;
 import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
 
 /**
@@ -28,38 +30,33 @@ import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
  *
  * @author Philipp Kanne
  */
-public class HackathonDungleMock
-{
-    private HackathonProcessMock hackatonTemplate = new HackathonProcessMock();
+public class HackathonDungleMock {
+	private HackathonProcessMock hackatonTemplate = new HackathonProcessMock();
 
-    private ProcessInstanceFactory instanceFactory;
+	private ProcessInstanceFactory instanceFactory;
 
-    public HackathonDungleMock()
-    {
-        this(new ProcessInstanceFactory(mock(ApplyStatusToNodeInstanceCommand.class)));
-    }
+	public HackathonDungleMock() {
+		this.instanceFactory = new ProcessInstanceFactory(
+				new ApplyStatusToNodeInstanceCommand(new NullStatusResolver()));
+	}
 
-    public HackathonDungleMock(ProcessInstanceFactory instanceFactory)
-    {
-        this.instanceFactory = instanceFactory;
-    }
+	public Collection<ProcessInstance> createDungle(int amount) {
+		Set<ProcessInstance> result = new HashSet<ProcessInstance>();
 
-    public Collection<ProcessInstance> createDungle(int amount)
-    {
-        Set<ProcessInstance> result = new HashSet<ProcessInstance>();
+		ProcessTemplate template = hackatonTemplate.createTemplate();
+		for (int i = 0; i < amount; i++) {
+			result.add(instanceFactory.create(template));
+		}
 
-        ProcessTemplate template = hackatonTemplate.createTemplate();
-        for (int i = 0; i < amount; i++)
-        {
-            result.add(instanceFactory.create(template));
-        }
+		return result;
+	}
 
-        return result;
-    }
+	public class NullStatusResolver implements ProcessInstanceStatusResolver {
 
-    public static void main(String[] args)
-    {
-        new HackathonDungleMock().createDungle(10);
-    }
+		@Override
+		public InstanceStatus resolve(NodeInstance instance) {
+			return null;
+		}
+	}
 
 }

@@ -15,10 +15,10 @@ package com.olia.processflyer.shared.bpmn.model.impl.dsl;
 import static com.olia.processflyer.shared.bpmn.template.impl.dsl.RenderInformationBuilder.Render;
 import static com.olia.processflyer.shared.bpmn.template.impl.dsl.TaskBuilder.Task;
 import static org.assertj.core.api.Assertions.assertThat;
-import javafx.geometry.Point3D;
 
 import org.junit.Test;
 
+import com.olia.processflyer.shared.bpmn.template.Point;
 import com.olia.processflyer.shared.bpmn.template.element.Task;
 import com.olia.processflyer.shared.bpmn.template.impl.dsl.TaskBuilder;
 
@@ -31,7 +31,7 @@ public class NodeRenderingDataTest
         Task node = Task().render(Render().startPosition(0d, 0d, 0d)) //
                 .node();
 
-        assertThat(node.getRenderingData().getStartPosition()).isEqualTo(new Point3D(0d, 0d, 0d));
+        assertThat(node.getRenderingData().getStartPosition()).isEqualTo(new Point(0d, 0d, 0d));
     }
 
     @Test
@@ -40,7 +40,7 @@ public class NodeRenderingDataTest
         Task node = Task().render(Render().endPosition(10d, 10d, 10d)) //
                 .node();
 
-        assertThat(node.getRenderingData().getEndPosition()).isEqualTo(new Point3D(10d, 10d, 10d));
+        assertThat(node.getRenderingData().getEndPosition()).isEqualTo(new Point(10d, 10d, 10d));
     }
 
     @Test
@@ -49,8 +49,8 @@ public class NodeRenderingDataTest
         Task node = Task().render(Render().addWayPoint(0d, 1d, 1d)) //
                 .node();
 
-        Point3D waypoint = node.getRenderingData().getWayPoints().get(0);
-        assertThat(waypoint).isEqualTo(new Point3D(0d, 1d, 1d));
+        Point waypoint = node.getRenderingData().getWayPoints().get(0);
+        assertThat(waypoint).isEqualTo(new Point(0d, 1d, 1d));
     }
 
     @Test
@@ -59,7 +59,7 @@ public class NodeRenderingDataTest
         Task node = Task().render(Render() //
                 .startPosition(0d, 0d, 0d).width(10d)).node();
 
-        assertThat(node.getRenderingData().getEndPosition()).isEqualTo(new Point3D(10d, 0d, 0d));
+        assertThat(node.getRenderingData().getEndPosition()).isEqualTo(new Point(10d, 0d, 0d));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class NodeRenderingDataTest
         Task node = TaskBuilder.Task().render(Render() //
                 .startPosition(0d, 0d, 0d).height(10d)).node();
 
-        assertThat(node.getRenderingData().getEndPosition()).isEqualTo(new Point3D(0d, 10d, 0d));
+        assertThat(node.getRenderingData().getEndPosition()).isEqualTo(new Point(0d, 10d, 0d));
     }
 
     @Test
@@ -77,6 +77,6 @@ public class NodeRenderingDataTest
         Task node = Task().render(Render() //
                 .startPosition(0d, 0d, 0d).depth(10d)).node();
 
-        assertThat(node.getRenderingData().getEndPosition()).isEqualTo(new Point3D(0d, 0d, 10d));
+        assertThat(node.getRenderingData().getEndPosition()).isEqualTo(new Point(0d, 0d, 10d));
     }
 }

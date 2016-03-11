@@ -15,8 +15,7 @@ package com.olia.processflyer.shared.bpmn.template.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.geometry.Point3D;
-
+import com.olia.processflyer.shared.bpmn.template.Point;
 import com.olia.processflyer.shared.bpmn.template.RenderingInformation;
 import com.olia.processflyer.shared.bpmn.template.TemplateElement;
 
@@ -29,11 +28,11 @@ public class RenderingInformationImpl implements RenderingInformation
 {
     private TemplateElement element;
 
-    private List<Point3D> waypoints = new ArrayList<Point3D>();
+    private List<Point> waypoints = new ArrayList<Point>();
 
-    private Point3D startPosition = new Point3D(0, 0, 0);
+    private Point startPosition = new Point(0d, 0d, 0d);
 
-    private Point3D endPosition = new Point3D(0, 0, 0);
+    private Point endPosition = new Point(0d, 0d, 0d);
 
     private double width;
 
@@ -53,19 +52,19 @@ public class RenderingInformationImpl implements RenderingInformation
     }
 
     @Override
-    public Point3D getStartPosition()
+    public Point getStartPosition()
     {
         return startPosition;
     }
 
     @Override
-    public Point3D getEndPosition()
+    public Point getEndPosition()
     {
         return endPosition;
     }
 
     @Override
-    public List<Point3D> getWayPoints()
+    public List<Point> getWayPoints()
     {
         return waypoints;
     }
@@ -88,7 +87,7 @@ public class RenderingInformationImpl implements RenderingInformation
         return depth;
     }
 
-    public boolean addWaypoint(Point3D waypoint)
+    public boolean addWaypoint(Point waypoint)
     {
         if (waypoint == null)
         {
@@ -97,12 +96,12 @@ public class RenderingInformationImpl implements RenderingInformation
         return waypoints.add(waypoint);
     }
 
-    public void setStartPosition(Point3D startPosition)
+    public void setStartPosition(Point startPosition)
     {
         this.startPosition = startPosition;
     }
 
-    public void setEndPosition(Point3D endPosition)
+    public void setEndPosition(Point endPosition)
     {
         this.endPosition = endPosition;
     }

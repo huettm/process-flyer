@@ -5,21 +5,6 @@
  */
 package com.olia.processflyer.client;
 
-import thothbot.parallax.core.client.AnimatedScene;
-import thothbot.parallax.core.shared.cameras.PerspectiveCamera;
-import thothbot.parallax.core.shared.geometries.BoxGeometry;
-import thothbot.parallax.core.shared.geometries.SphereGeometry;
-import thothbot.parallax.core.shared.lights.AmbientLight;
-import thothbot.parallax.core.shared.lights.DirectionalLight;
-import thothbot.parallax.core.shared.lights.HemisphereLight;
-import thothbot.parallax.core.shared.lights.PointLight;
-import thothbot.parallax.core.shared.materials.MeshBasicMaterial;
-import thothbot.parallax.core.shared.materials.MeshPhongMaterial;
-import thothbot.parallax.core.shared.math.Color;
-import thothbot.parallax.core.shared.math.Vector2;
-import thothbot.parallax.core.shared.math.Vector3;
-import thothbot.parallax.core.shared.objects.Mesh;
-
 import java.util.Collection;
 
 import com.google.gwt.core.client.GWT;
@@ -27,7 +12,16 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.olia.processflyer.shared.SceneUpdaterService;
 import com.olia.processflyer.shared.SceneUpdaterServiceAsync;
 import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceImpl;
-import com.google.gwt.user.client.rpc.AsyncCallback;
+
+import thothbot.parallax.core.client.AnimatedScene;
+import thothbot.parallax.core.shared.cameras.PerspectiveCamera;
+import thothbot.parallax.core.shared.core.Geometry;
+import thothbot.parallax.core.shared.lights.AmbientLight;
+import thothbot.parallax.core.shared.lights.DirectionalLight;
+import thothbot.parallax.core.shared.materials.Material;
+import thothbot.parallax.core.shared.materials.MeshLambertMaterial;
+import thothbot.parallax.core.shared.math.Color;
+import thothbot.parallax.core.shared.objects.Mesh;
 /**
  *
  * @author HUETTM
@@ -62,69 +56,70 @@ public class MyScene extends AnimatedScene {
     	}
     	sceneUpdater.getProcessInstances(callback);
     	
-        // Loads default camera for the Animation
-        camera = new PerspectiveCamera(
-                100, // field of view
-                getRenderer().getAbsoluteAspectRation(), // aspect ratio 
-                1, // near
-                1000 // far 
-        );
-
-        camera.getPosition().setZ(400);
-
-        BoxGeometry geometry = new BoxGeometry(200, 200, 200);       
-
-        MeshPhongMaterial material = new MeshPhongMaterial();
-        material.setColor(new Color(0xFF0000));
-        //material.setWireframe(true);
-
-        this.mesh1 = new Mesh(geometry, material);
+        camera.getPosition().setZ(600);
+        //this.controls = new FirstPersonControls( camera, getCanvas() );
         
-        SphereGeometry sphere = new SphereGeometry(30, 30, 30, 0, Math.PI * 2, 0, Math.PI * 2);
-        MeshPhongMaterial sphereMaterial = new MeshPhongMaterial();;
-        sphereMaterial.setColor(new Color(0x0066ff));
-        
-        this.mesh2 = new Mesh(sphere, sphereMaterial);
-         
+        getScene().add(new AmbientLight(0x404040));
 
-//        PointLight light = new PointLight( 0xffffff); 
-//        light.getPosition().set( 30, 300, 0 ); 
-//        getScene().add( light );
+        DirectionalLight light = new DirectionalLight(0xffffff);
+        light.getPosition().set(0, 1, 0);
+        getScene().add(light);
         
-        DirectionalLight dirLight = new DirectionalLight( 0xffffff, 1.0 ); 
-        dirLight.getPosition().set( 0, 100, 0 ); 
-        getScene().add( dirLight );
+        MeshLambertMaterial material = new MeshLambertMaterial();      
+        material.setAmbient( new Color(0xbbbbbb) );
+        material.setSide(Material.SIDE.DOUBLE);
         
-        getScene().add(mesh1);
-        getScene().add(mesh2);
-        Vector3 spherePosition = mesh2.getPosition();
-        spherePosition.addX(300.0);
-        spherePosition.addZ(-100.0);
-        //AmbientLight ambLight = new AmbientLight( 0xffffff );
-        //getScene().add(ambLight);
-              
+        ProcessBox process = new ProcessBox();
+        process.loadProcessDefinition();
+        process.getPosition().addX(300);
         
+        for(Geometry object: process.processObjects) {
+            getScene().add(new Mesh(object, material));          
+        }
+        
+        for(int i = 0; i < getScene().getChildren().size(); i++) {
+            int newX = 0;
+            if(i != 0) {
+                newX = i * process.getDistance() + Double.valueOf(process.getPosition().getX()).intValue();
+            }
+            getScene().getChildren().get(i).getPosition().addX(-1 * newX);
+        }
+
+//        SphereGeometry startPoint = new SphereGeometry(50, 100, 100);        
+//
+//        Mesh mesh1 = new Mesh(startPoint, material);
+//
+//        BoxGeometry processStep1 = new BoxGeometry(100, 100, 100);
+//       
+//        Mesh mesh2 = new Mesh(processStep1, material);
+//
+////        DirectionalLight dirLight = new DirectionalLight(0xffffff, 1.0);
+////        dirLight.getPosition().set(0, 100, 0);
+////        getScene().add(dirLight);
+        //getScene().add(mesh1);
+//        getScene().add(mesh2);
+//        Vector3 spherePosition = mesh1.getPosition();
+//        spherePosition.addX(200.0);       
+//
+////        AmbientLight ambLight = new AmbientLight(0xffffff);
+////        getScene().add(ambLight);
+//        OctahedronGeometry gateway = new OctahedronGeometry(
+//                50, // Sets the radius of octahedron 
+//                0 // Sets the frequency of decomposition
+//        );
+//
+//        Mesh gateWayMesh = new Mesh(gateway, material);
+//
+//        getScene().add(gateWayMesh);
+//
+//        gateWayMesh.getPosition().addX(-200);
     }
 
-    
     @Override
     protected void onUpdate(double duration) {
-        // Called when the animation should be updated.
-        
-        this.mesh1.getRotation().addX(0.005);
-        this.mesh1.getRotation().addY(0.01);
-                
-        if(this.mesh2.getPosition().getY() > 1000.0) {
-            moveup = false;
-        } else if (this.mesh2.getPosition().getY() < 100.0) {
-            moveup = true;
-        }
-        if(moveup) {
-            this.mesh2.getPosition().addY(10.0);
-        } else {
-            this.mesh2.getPosition().addY(-10.0);
-        }
+        // Called when the animation should be updated.        
         getRenderer().render(getScene(), camera);
+        //this.controls.update(1);
     }
 
 }

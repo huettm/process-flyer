@@ -54,7 +54,7 @@ public class MyScene extends AnimatedScene {
     protected void onStart() {
 
     	if(sceneUpdater==null) {
-//    		sceneUpdater=GWT.create(SceneUpdaterService.class);
+    		sceneUpdater=GWT.create(SceneUpdaterService.class);
     	}
         // Loads default camera for the Animation
         camera = new PerspectiveCamera(

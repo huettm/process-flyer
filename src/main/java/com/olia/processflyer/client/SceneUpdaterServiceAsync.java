@@ -6,5 +6,5 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.olia.processflyer.shared.bpmn.instance.ProcessInstance;
 
 public interface SceneUpdaterServiceAsync {
-	void getProcessInstances(AsyncCallback<Collection<ProcessInstance> > pCallback);
+	void getProcessInstances(AsyncCallback<Collection<ProcessInstanceImpl> > pCallback);
 }

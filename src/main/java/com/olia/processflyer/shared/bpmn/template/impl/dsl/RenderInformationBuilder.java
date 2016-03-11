@@ -12,10 +12,11 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl.dsl;
 
-import javafx.geometry.Point3D;
-
+import com.olia.processflyer.shared.bpmn.template.Point;
 import com.olia.processflyer.shared.bpmn.template.RenderingInformation;
 import com.olia.processflyer.shared.bpmn.template.impl.RenderingInformationImpl;
+
+import javafx.geometry.Point3D;
 
 /**
  * DOCME
@@ -38,21 +39,21 @@ public class RenderInformationBuilder
 
     public RenderInformationBuilder addWayPoint(double x, double y, double z)
     {
-        data.getWayPoints().add(new Point3D(x, y, z));
+        data.getWayPoints().add(new Point(x, y, z));
         return this;
     }
 
     public RenderInformationBuilder startPosition(double x, double y, double z)
     {
-        data.setStartPosition(new Point3D(x, y, z));
+        data.setStartPosition(new Point(x, y, z));
         return this;
     }
 
     public RenderInformationBuilder endPosition(double x, double y, double z)
     {
-        data.setEndPosition(new Point3D(x, y, z));
+        data.setEndPosition(new Point(x, y, z));
 
-        Point3D subtracted = data.getEndPosition().subtract(data.getStartPosition());
+        Point subtracted = data.getEndPosition().subtract(data.getStartPosition());
 
         data.setWidth(subtracted.getX());
         data.setHeight(subtracted.getY());
@@ -63,7 +64,7 @@ public class RenderInformationBuilder
 
     public RenderInformationBuilder width(double width)
     {
-        data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point3D(width, 0, 0)));
+        data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point(width, 0, 0)));
         data.setWidth(width);
 
         return this;
@@ -71,7 +72,7 @@ public class RenderInformationBuilder
 
     public RenderInformationBuilder height(double height)
     {
-        data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point3D(0, height, 0)));
+        data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point(0, height, 0)));
         data.setHeight(height);
 
         return this;
@@ -79,19 +80,19 @@ public class RenderInformationBuilder
 
     public RenderInformationBuilder depth(double depth)
     {
-        data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point3D(0, 0, depth)));
+        data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point(0, 0, depth)));
         data.setDepth(depth);
 
         return this;
     }
 
-    private Point3D getEndPositionOrCreateFromStartPosition()
+    private Point getEndPositionOrCreateFromStartPosition()
     {
-        Point3D endPosition = data.getEndPosition();
+    	Point endPosition = data.getEndPosition();
         if (endPosition == null)
         {
-            Point3D start = data.getStartPosition();
-            data.setEndPosition(new Point3D(start.getX(), start.getY(), start.getZ()));
+        	Point start = data.getStartPosition();
+            data.setEndPosition(new Point(start.getX(), start.getY(), start.getZ()));
             endPosition = data.getEndPosition();
         }
         return endPosition;

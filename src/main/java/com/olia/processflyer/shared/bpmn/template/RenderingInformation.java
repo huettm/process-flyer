@@ -14,8 +14,6 @@ package com.olia.processflyer.shared.bpmn.template;
 
 import java.util.List;
 
-import javafx.geometry.Point3D;
-
 /**
  * Information for rendering a node.
  *
@@ -35,14 +33,14 @@ public interface RenderingInformation
      * 
      * @return
      */
-    Point3D getStartPosition();
+    Point getStartPosition();
 
     /**
      * The lower right corner of node.
      * 
      * @return
      */
-    Point3D getEndPosition();
+    Point getEndPosition();
 
     /**
      * All steps from start to end. This list will contain at least the start and end point. I.e a connector can have
@@ -50,7 +48,7 @@ public interface RenderingInformation
      * 
      * @return List of postions, contains at least two elements.
      */
-    List<Point3D> getWayPoints();
+    List<Point> getWayPoints();
 
     /**
      * The width.

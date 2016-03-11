@@ -23,121 +23,102 @@ import com.olia.processflyer.shared.bpmn.instance.ProcessInstance;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
 import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
+import com.olia.processflyer.shared.bpmn.template.impl.InOrderNodeVisitorStrategy;
 
 /**
  * DOCME
  *
  * @author Philipp Kanne
  */
-public class ProcessInstanceImpl implements ProcessInstance, IsSerializable
-{
+public class ProcessInstanceImpl implements ProcessInstance, IsSerializable {
 
-    private final ProcessTemplate processTemplate;
+	private final ProcessTemplate processTemplate;
 
-    private InstanceStatus state;
+	private InstanceStatus state;
 
-    private final String uniqueIdentifier;
+	private final String uniqueIdentifier;
 
-    private Map<String, NodeInstance> instances = new HashMap<String, NodeInstance>();
+	private Map<String, NodeInstance> instances = new HashMap<String, NodeInstance>();
 
-    public ProcessInstanceImpl(ProcessTemplate processTemplate, String uniqueIdentifier)
-    {
-        super();
-        this.processTemplate = processTemplate;
-        this.uniqueIdentifier = uniqueIdentifier;
-        this.state = InstanceStatusImpl.notExecutedState();
-    }
+	public ProcessInstanceImpl(ProcessTemplate processTemplate, String uniqueIdentifier) {
+		super();
+		this.processTemplate = processTemplate;
+		this.uniqueIdentifier = uniqueIdentifier;
+		this.state = InstanceStatusImpl.notExecutedState();
+	}
 
-    @Override
-    public ProcessTemplate getProcessTemplate()
-    {
-        return processTemplate;
-    }
+	@Override
+	public ProcessTemplate getProcessTemplate() {
+		return processTemplate;
+	}
 
-    @Override
-    public InstanceStatus getState()
-    {
-        return state;
-    }
+	@Override
+	public InstanceStatus getState() {
+		return state;
+	}
 
-    @Override
-    public String getUniqueIdentifier()
-    {
-        return uniqueIdentifier;
-    }
+	@Override
+	public String getUniqueIdentifier() {
+		return uniqueIdentifier;
+	}
 
-    public void addNodeInstance(NodeInstance nodeInstance)
-    {
-        instances.put(nodeInstance.getUniqueIdentifier(), nodeInstance);
-    }
+	public void addNodeInstance(NodeInstance nodeInstance) {
+		instances.put(nodeInstance.getUniqueIdentifier(), nodeInstance);
+	}
 
-    public NodeInstance getInstanceByUUID(String uuid)
-    {
-        return instances.get(uuid);
-    }
+	public NodeInstance getInstanceByUUID(String uuid) {
+		return instances.get(uuid);
+	}
 
-    @Override
-    public java.util.Set<NodeInstance> getInstances()
-    {
-        return new HashSet<NodeInstance>(instances.values());
-    }
+	@Override
+	public java.util.Set<NodeInstance> getInstances() {
+		return new HashSet<NodeInstance>(instances.values());
+	}
 
-    @Override
-    public NodeInstance getInstanceFor(Node<? extends NodeType> node)
-    {
-        for (NodeInstance instance : instances.values())
-        {
-            if (instance.getNode().equals(node))
-            {
-                return instance;
-            }
-        }
-        return null;
-    }
+	@Override
+	public NodeInstance getInstanceFor(Node<? extends NodeType> node) {
+		for (NodeInstance instance : instances.values()) {
+			if (instance.getNode().equals(node)) {
+				return instance;
+			}
+		}
+		return null;
+	}
 
-    @Override
-    public String toString()
-    {
-        return "ProcessInstance [uuid=" + uniqueIdentifier + ", template=" + processTemplate + "]";
-    }
+	@Override
+	public String toString() {
+		return "ProcessInstance [uuid=" + uniqueIdentifier + ", template=" + processTemplate + "]";
+	}
 
-    @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((uniqueIdentifier == null) ? 0 : uniqueIdentifier.hashCode());
-        return result;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((uniqueIdentifier == null) ? 0 : uniqueIdentifier.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        ProcessInstanceImpl other = (ProcessInstanceImpl) obj;
-        if (uniqueIdentifier == null)
-        {
-            if (other.uniqueIdentifier != null)
-            {
-                return false;
-            }
-        }
-        else if (!uniqueIdentifier.equals(other.uniqueIdentifier))
-        {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		ProcessInstanceImpl other = (ProcessInstanceImpl) obj;
+		if (uniqueIdentifier == null) {
+			if (other.uniqueIdentifier != null) {
+				return false;
+			}
+		} else if (!uniqueIdentifier.equals(other.uniqueIdentifier)) {
+			return false;
+		}
+		return true;
+	}
+
 
 }

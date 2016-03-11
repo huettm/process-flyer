@@ -20,6 +20,10 @@ import thothbot.parallax.core.shared.math.Vector2;
 import thothbot.parallax.core.shared.math.Vector3;
 import thothbot.parallax.core.shared.objects.Mesh;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+
+import com.google.gwt.user.client.rpc.AsyncCallback;
 /**
  *
  * @author HUETTM
@@ -34,9 +38,24 @@ public class MyScene extends AnimatedScene {
     
     private boolean moveup = true;
     
+    private SceneUpdaterServiceAsync sceneUpdater;
 
+//    AsyncCallback<Collection<ProcessInstanceImpl>> callback = new AsyncCallback<Collection<ProcessInstanceImpl>>() {
+//        public void onFailure(Throwable caught) {
+//          // TODO: Do something with errors.
+//        }
+//
+//        public void onSuccess(Collection<ProcessInstance> result) {
+//          updateTable(result);
+//        }
+//      };
+      
     @Override
     protected void onStart() {
+
+    	if(sceneUpdater==null) {
+//    		sceneUpdater=GWT.create(SceneUpdaterService.class);
+    	}
         // Loads default camera for the Animation
         camera = new PerspectiveCamera(
                 100, // field of view

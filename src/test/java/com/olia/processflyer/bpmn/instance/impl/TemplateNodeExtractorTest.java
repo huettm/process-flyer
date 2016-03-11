@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.olia.processfly.bpmn.model.hackathon.HackathonProcessMock;
+import com.olia.processflyer.shared.bpmn.instance.HackathonProcessMock;
 import com.olia.processflyer.shared.bpmn.instance.impl.TemplateNodeExtractor;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;

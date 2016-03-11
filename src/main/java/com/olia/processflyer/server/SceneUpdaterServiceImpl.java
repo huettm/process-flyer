@@ -3,23 +3,23 @@ package com.olia.processflyer.server;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Vector;
 
-import com.olia.processfly.bpmn.model.hackathon.HackathonDungleMock;
-import com.olia.processfly.bpmn.model.hackathon.HackathonProcessMock;
 import com.olia.processflyer.client.SceneUpdaterService;
+import com.olia.processflyer.shared.bpmn.instance.HackathonProcessMock;
 import com.olia.processflyer.shared.bpmn.instance.InstanceStatus;
 import com.olia.processflyer.shared.bpmn.instance.NodeInstance;
 import com.olia.processflyer.shared.bpmn.instance.ProcessInstance;
 import com.olia.processflyer.shared.bpmn.instance.impl.ApplyStatusToNodeInstanceCommand;
 import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceFactory;
-import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceImpl;
 import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceStatusResolver;
-import com.olia.processflyer.shared.bpmn.template.Node;
-import com.olia.processflyer.shared.bpmn.template.NodeType;
 import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
 
-public class SceneUpdaterServiceImpl implements SceneUpdaterService {
+public class SceneUpdaterServiceImpl extends com.google.gwt.user.server.rpc.RemoteServiceServlet implements SceneUpdaterService {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7859593133747401123L;
 
 	private HackathonProcessMock hackatonTemplate = new HackathonProcessMock();
 	

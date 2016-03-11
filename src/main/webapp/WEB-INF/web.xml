@@ -9,5 +9,16 @@
   <welcome-file-list>
     <welcome-file>parallax.html</welcome-file>
   </welcome-file-list>
+  
+<!-- Servlets -->
+  <servlet>
+    <servlet-name>sceneUpdaterImpl</servlet-name>
+    <servlet-class> com.olia.processflyer.server.SceneUpdaterServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>sceneUpdaterImpl</servlet-name>
+    <url-pattern>/sceneUpdater</url-pattern>
+  </servlet-mapping>
 
 </web-app>

@@ -12,6 +12,9 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
+import java.util.List;
+
+import com.olia.processflyer.shared.bpmn.instance.impl.CollectAllNodesProcessTemplateVisitor;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
 import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
@@ -21,68 +24,62 @@ import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
  *
  * @author Philipp Kanne
  */
-public class ProcessTemplateImpl implements ProcessTemplate
-{
-    private final Node<? extends NodeType> root;
+public class ProcessTemplateImpl implements ProcessTemplate {
+	private final Node<? extends NodeType> root;
 
-    private final String name;
+	private final String name;
 
-    public ProcessTemplateImpl(Node<? extends NodeType> root, String name)
-    {
-        super();
-        this.root = root;
-        this.name = name;
-    }
+	public ProcessTemplateImpl(Node<? extends NodeType> root, String name) {
+		super();
+		this.root = root;
+		this.name = name;
+	}
 
-    @Override
-    public Node<? extends NodeType> getRootNode()
-    {
-        return root;
-    }
+	@Override
+	public Node<? extends NodeType> getRootNode() {
+		return root;
+	}
 
-    @Override
-    public String getName()
-    {
-        return name;
-    }
+	@Override
+	public String getName() {
+		return name;
+	}
 
-    @Override
-    public int hashCode()
-    {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        return result;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
 
-    @Override
-    public boolean equals(Object obj)
-    {
-        if (this == obj)
-        {
-            return true;
-        }
-        if (obj == null)
-        {
-            return false;
-        }
-        if (getClass() != obj.getClass())
-        {
-            return false;
-        }
-        ProcessTemplateImpl other = (ProcessTemplateImpl) obj;
-        if (name == null)
-        {
-            if (other.name != null)
-            {
-                return false;
-            }
-        }
-        else if (!name.equals(other.name))
-        {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		ProcessTemplateImpl other = (ProcessTemplateImpl) obj;
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
+			return false;
+		}
+		return true;
+	}
+
+	public List<Node<?>> getAllNodes() {
+		CollectAllNodesProcessTemplateVisitor visitor = new CollectAllNodesProcessTemplateVisitor();
+		InOrderNodeVisitorStrategy.anInOrderVisitorStrategyFor(root).apply(visitor);
+		
+		return visitor.getNodes();
+	}
 
 }

@@ -14,6 +14,7 @@ import com.olia.processflyer.shared.SceneUpdaterServiceAsync;
 import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceImpl;
 
 import thothbot.parallax.core.client.AnimatedScene;
+import thothbot.parallax.core.client.controls.FirstPersonControls;
 import thothbot.parallax.core.shared.cameras.PerspectiveCamera;
 import thothbot.parallax.core.shared.core.Geometry;
 import thothbot.parallax.core.shared.lights.AmbientLight;
@@ -28,13 +29,16 @@ import thothbot.parallax.core.shared.objects.Mesh;
  */
 public class MyScene extends AnimatedScene {
 
+
     PerspectiveCamera camera;
 
-    private Mesh mesh1;
-    
-    private Mesh mesh2;
-    
+    private String imageAsString;
+
     private boolean moveup = true;
+
+    private static final String imageLocation = "Tulips.jpg";
+
+    FirstPersonControls controls;
     
     private SceneUpdaterServiceAsync sceneUpdater;
 

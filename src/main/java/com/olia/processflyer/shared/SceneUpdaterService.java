@@ -1,14 +1,12 @@
-package com.olia.processflyer.client;
+package com.olia.processflyer.shared;
 
 import java.util.Collection;
-import java.util.Vector;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
-import com.olia.processflyer.shared.bpmn.instance.ProcessInstance;
 import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceImpl;
 
 @RemoteServiceRelativePath("sceneUpdater")
-public interface SceneUpdaterService {
+public interface SceneUpdaterService extends RemoteService {
 	Collection<ProcessInstanceImpl> getProcessInstances();
 }

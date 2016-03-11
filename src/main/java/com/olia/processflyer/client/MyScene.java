@@ -22,7 +22,8 @@ import thothbot.parallax.core.shared.objects.Mesh;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-
+import com.olia.processflyer.shared.SceneUpdaterService;
+import com.olia.processflyer.shared.SceneUpdaterServiceAsync;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 /**
  *

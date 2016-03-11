@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.instance.InstanceStatus;
 import com.olia.processflyer.shared.bpmn.instance.NodeInstance;
 import com.olia.processflyer.shared.bpmn.instance.ProcessInstance;
@@ -28,7 +29,7 @@ import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
  *
  * @author Philipp Kanne
  */
-public class ProcessInstanceImpl implements ProcessInstance
+public class ProcessInstanceImpl implements ProcessInstance, IsSerializable
 {
 
     private final ProcessTemplate processTemplate;

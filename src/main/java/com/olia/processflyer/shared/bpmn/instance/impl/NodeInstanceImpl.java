@@ -65,12 +65,6 @@ public class NodeInstanceImpl implements NodeInstance
     }
 
     @Override
-    public Properties getProperties()
-    {
-        return properties;
-    }
-
-    @Override
     public String getUniqueIdentifier()
     {
         return uniqueIdentifier;

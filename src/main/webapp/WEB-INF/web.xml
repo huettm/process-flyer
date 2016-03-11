@@ -4,21 +4,31 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-  
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>parallax.html</welcome-file>
-  </welcome-file-list>
-  
-<!-- Servlets -->
-  <servlet>
-    <servlet-name>sceneUpdaterImpl</servlet-name>
-    <servlet-class> com.olia.processflyer.server.SceneUpdaterServiceImpl</servlet-class>
-  </servlet>
 
-  <servlet-mapping>
-    <servlet-name>sceneUpdaterImpl</servlet-name>
-    <url-pattern>/sceneUpdater</url-pattern>
-  </servlet-mapping>
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>parallax.html</welcome-file>
+	</welcome-file-list>
+
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>sceneUpdaterImpl</servlet-name>
+		<servlet-class> com.olia.processflyer.server.SceneUpdaterServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>sceneUpdaterImpl</servlet-name>
+		<url-pattern>/sceneUpdater</url-pattern>
+	</servlet-mapping>
+
+	<!-- remote logging -->
+	<servlet>
+		<servlet-name>remoteLogging</servlet-name>
+		<servlet-class>com.google.gwt.logging.server.RemoteLoggingServiceImpl</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>remoteLogging</servlet-name>
+		<url-pattern>/ProcessFlyer/remote_logging</url-pattern>
+	</servlet-mapping>
 
 </web-app>

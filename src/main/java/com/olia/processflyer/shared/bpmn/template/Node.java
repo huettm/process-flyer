@@ -44,5 +44,7 @@ public interface Node<NODE_TYPE extends NodeType> extends Identifiable, Markable
      * @return
      */
     NODE_TYPE getType();
+    
+    NodeElementType getElementType();
 
 }

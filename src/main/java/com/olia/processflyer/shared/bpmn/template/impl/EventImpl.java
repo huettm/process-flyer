@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
+import com.olia.processflyer.shared.bpmn.template.NodeElementType;
 import com.olia.processflyer.shared.bpmn.template.element.Event;
 import com.olia.processflyer.shared.bpmn.template.element.EventType;
 
@@ -41,5 +42,11 @@ public class EventImpl extends AbstractBaseNode<EventType> implements Event
         // TODO
         return false;
     }
+    
+    @Override
+	public NodeElementType getElementType() {
+
+		return NodeElementType.Event;
+	}
 
 }

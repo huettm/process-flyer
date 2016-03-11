@@ -99,9 +99,9 @@
                 <!-- Plugin configuration. There are many available options, see 
                 gwt-maven-plugin documentation at codehaus.org -->
                 <configuration>
-                    <runTarget>parallax.html</runTarget>
+                    <runTarget>ProcessFlyer.html</runTarget>
                     <modules>
-                        <module>com.olia.processflyer.parallax</module>
+                        <module>com.olia.processflyer.ProcessFlyer</module>
                     </modules>
                 </configuration>
             </plugin>

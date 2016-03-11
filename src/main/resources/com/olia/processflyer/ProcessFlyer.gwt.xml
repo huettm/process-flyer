@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to='parallax'>
+<module rename-to='ProcessFlyer'>
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User' />
 
@@ -14,9 +14,10 @@
   <inherits name="thothbot.parallax.core.Core"/>
   
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='com.olia.processflyer.client.Parallax' />
+  <entry-point class='com.olia.processflyer.client.ProcessFlyer' />
   <set-property name="user.agent" value="gecko1_8" />
   <!-- Specify the paths for translatable code                    -->
+  <inherits name="com.google.gwt.logging.Logging"/>
   <source path='client' />
   <source path='shared' />
 

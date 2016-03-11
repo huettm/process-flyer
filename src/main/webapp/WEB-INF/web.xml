@@ -10,15 +10,15 @@
     <welcome-file>parallax.html</welcome-file>
   </welcome-file-list>
   
-  <!-- Servlets -->
+<!-- Servlets -->
   <servlet>
-    <servlet-name>textRendererServiceImpl</servlet-name>
-    <servlet-class>com.olia.processflyer.server.TextRendererServiceImpl</servlet-class>
+    <servlet-name>sceneUpdaterImpl</servlet-name>
+    <servlet-class> com.olia.processflyer.server.SceneUpdaterServiceImpl</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>textRendererServiceImpl</servlet-name>
-    <url-pattern>/textRenderer</url-pattern>
+    <servlet-name>sceneUpdaterImpl</servlet-name>
+    <url-pattern>/sceneUpdater</url-pattern>
   </servlet-mapping>
 
 </web-app>

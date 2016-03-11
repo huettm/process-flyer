@@ -32,6 +32,8 @@ public class MyScene extends AnimatedScene {
     
     private Mesh mesh2;
     
+    private boolean moveup = true;
+    
 
     @Override
     protected void onStart() {
@@ -79,12 +81,24 @@ public class MyScene extends AnimatedScene {
         
     }
 
+    
     @Override
     protected void onUpdate(double duration) {
         // Called when the animation should be updated.
+        
         this.mesh1.getRotation().addX(0.005);
         this.mesh1.getRotation().addY(0.01);
-                        
+                
+        if(this.mesh2.getPosition().getY() > 1000.0) {
+            moveup = false;
+        } else if (this.mesh2.getPosition().getY() < 100.0) {
+            moveup = true;
+        }
+        if(moveup) {
+            this.mesh2.getPosition().addY(10.0);
+        } else {
+            this.mesh2.getPosition().addY(-10.0);
+        }
         getRenderer().render(getScene(), camera);
     }
 

@@ -38,7 +38,7 @@ public class ProcessInstanceFactory
         this.applyStatusCommand = applyStatusCommand;
     }
 
-    public ProcessInstance create(ProcessTemplate template)
+    public ProcessInstanceImpl create(ProcessTemplate template)
     {
         ProcessInstanceImpl instance = new ProcessInstanceImpl(template, UUID.randomUUID().toString());
         List<Node<? extends NodeType>> nodes = nodeExtractor.extractNodes(template);

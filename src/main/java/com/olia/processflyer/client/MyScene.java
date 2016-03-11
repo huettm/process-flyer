@@ -46,11 +46,11 @@ public class MyScene extends AnimatedScene {
 
     AsyncCallback<Collection<ProcessInstanceImpl>> callback = new AsyncCallback<Collection<ProcessInstanceImpl>>() {
         public void onFailure(Throwable caught) {
-          // TODO: Do something with errors.
+          GWT.log("Error: "+caught.getMessage());
         }
 
         public void onSuccess(Collection<ProcessInstanceImpl> result) {
-          ;
+          GWT.log("Received new scene update: "+result.size()+" process instances");
         }
       };
       

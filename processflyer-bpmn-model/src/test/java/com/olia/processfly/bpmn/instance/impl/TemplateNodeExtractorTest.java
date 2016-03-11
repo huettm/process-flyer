@@ -1,4 +1,4 @@
-package com.olia.processfly.bpmn.instance.impl;
+package com.olia.processflyer.shared.bpmn.instance.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,9 +7,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.olia.processfly.bpmn.model.hackathon.HackathonProcessMock;
-import com.olia.processfly.bpmn.template.Node;
-import com.olia.processfly.bpmn.template.ProcessTemplate;
+import com.olia.processflyer.shared.bpmn.model.hackathon.HackathonProcessMock;
+import com.olia.processflyer.shared.bpmn.template.Node;
+import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
 
 public class TemplateNodeExtractorTest
 {

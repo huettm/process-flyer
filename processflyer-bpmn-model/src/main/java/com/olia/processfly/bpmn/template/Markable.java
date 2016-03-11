@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.template;
+package com.olia.processflyer.shared.bpmn.template;
 
-import com.olia.processfly.bpmn.template.element.Label;
+import com.olia.processflyer.shared.bpmn.template.element.Label;
 
 /**
  * Attaches a label to a node.

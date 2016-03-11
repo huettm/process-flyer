@@ -14,8 +14,8 @@ package com.olia.processflyer.shared.bpmn.instance;
 
 import java.util.Set;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Node;
 import com.olia.processflyer.shared.bpmn.template.Identifiable;
+import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
 import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
 

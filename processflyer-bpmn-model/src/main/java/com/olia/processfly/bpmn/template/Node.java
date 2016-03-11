@@ -10,11 +10,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.template;
+package com.olia.processflyer.shared.bpmn.template;
 
 import java.util.List;
 
-import com.olia.processfly.bpmn.template.element.NodeConnector;
+import com.olia.processflyer.shared.bpmn.template.element.NodeConnector;
 
 /**
  * A BPMN node.

@@ -10,17 +10,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.instance.impl;
+package com.olia.processflyer.shared.bpmn.instance.impl;
 
-import static com.olia.processfly.bpmn.instance.impl.InstanceStatusImpl.notExecutedState;
+import static com.olia.processflyer.shared.bpmn.instance.impl.InstanceStatusImpl.notExecutedState;
 
 import java.util.Properties;
 
-import com.olia.processfly.bpmn.instance.InstanceStatus;
-import com.olia.processfly.bpmn.instance.InstanceStatusType;
-import com.olia.processfly.bpmn.instance.NodeInstance;
-import com.olia.processfly.bpmn.template.Node;
-import com.olia.processfly.bpmn.template.NodeType;
+import com.olia.processflyer.shared.bpmn.instance.InstanceStatus;
+import com.olia.processflyer.shared.bpmn.instance.InstanceStatusType;
+import com.olia.processflyer.shared.bpmn.instance.NodeInstance;
+import com.olia.processflyer.shared.bpmn.template.Node;
+import com.olia.processflyer.shared.bpmn.template.NodeType;
 
 /**
  * DOCME

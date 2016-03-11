@@ -10,15 +10,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.instance.impl;
+package com.olia.processflyer.shared.bpmn.instance.impl;
 
-import static com.olia.processfly.bpmn.template.impl.InOrderNodeVisitorStrategy.anInOrderVisitorStrategyFor;
+import static com.olia.processflyer.shared.bpmn.template.impl.InOrderNodeVisitorStrategy.anInOrderVisitorStrategyFor;
 
 import java.util.List;
 
-import com.olia.processfly.bpmn.template.Node;
-import com.olia.processfly.bpmn.template.ProcessTemplate;
-import com.olia.processfly.bpmn.template.impl.NodeVisitorStrategy;
+import com.olia.processflyer.shared.bpmn.template.Node;
+import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
+import com.olia.processflyer.shared.bpmn.template.impl.NodeVisitorStrategy;
 
 /**
  * Extracts all nodes from the template using a visitor. Uses an in-order strategy to iterate the template.

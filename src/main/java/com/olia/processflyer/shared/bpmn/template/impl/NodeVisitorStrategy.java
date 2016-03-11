@@ -10,9 +10,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.template.impl;
+package com.olia.processflyer.shared.bpmn.template.impl;
 
-import com.olia.processfly.bpmn.template.NodeVisitor;
+import com.olia.processflyer.shared.bpmn.template.NodeVisitor;
 
 /**
  * A strategy for node visitors.

@@ -1,4 +1,4 @@
-package com.olia.processfly.bpmn.instance.impl;
+package com.olia.processflyer.shared.bpmn.instance.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -7,11 +7,11 @@ import static org.mockito.Mockito.when;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.olia.processfly.bpmn.instance.ProcessInstance;
-import com.olia.processfly.bpmn.template.Node;
-import com.olia.processfly.bpmn.template.ProcessTemplate;
-import com.olia.processfly.bpmn.template.impl.dsl.ConnectionBuilder;
-import com.olia.processfly.bpmn.template.impl.dsl.EventBuilder;
+import com.olia.processflyer.shared.bpmn.instance.ProcessInstance;
+import com.olia.processflyer.shared.bpmn.template.Node;
+import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
+import com.olia.processflyer.shared.bpmn.template.impl.dsl.ConnectionBuilder;
+import com.olia.processflyer.shared.bpmn.template.impl.dsl.EventBuilder;
 
 public class ProcessInstanceFactoryTest
 {

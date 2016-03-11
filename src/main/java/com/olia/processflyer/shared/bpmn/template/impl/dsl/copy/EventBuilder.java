@@ -1,7 +1,7 @@
-package com.olia.processfly.bpmn.template.impl.dsl.copy;
+package com.olia.processflyer.shared.bpmn.template.impl.dsl.copy;
 
-import com.olia.processfly.bpmn.template.element.Event;
-import com.olia.processfly.bpmn.template.impl.EventImpl;
+import com.olia.processflyer.shared.bpmn.template.element.Event;
+import com.olia.processflyer.shared.bpmn.template.impl.EventImpl;
 
 public class EventBuilder extends AbstractNodeBuilder<EventImpl, Event, EventBuilder> implements NodeBuilder<Event>
 {

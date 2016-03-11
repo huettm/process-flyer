@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.model.hackathon;
+package com.olia.processflyer.shared.bpmn.model.hackathon;
 
 import static org.mockito.Mockito.mock;
 
@@ -18,10 +18,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.olia.processfly.bpmn.instance.ProcessInstance;
-import com.olia.processfly.bpmn.instance.impl.ApplyStatusToNodeInstanceCommand;
-import com.olia.processfly.bpmn.instance.impl.ProcessInstanceFactory;
-import com.olia.processfly.bpmn.template.ProcessTemplate;
+import com.olia.processflyer.shared.bpmn.instance.ProcessInstance;
+import com.olia.processflyer.shared.bpmn.instance.impl.ApplyStatusToNodeInstanceCommand;
+import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceFactory;
+import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
 
 /**
  * DOCME

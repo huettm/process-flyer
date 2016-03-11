@@ -1,7 +1,7 @@
-package com.olia.processfly.bpmn.template.impl.dsl.copy;
+package com.olia.processflyer.shared.bpmn.template.impl.dsl.copy;
 
-import com.olia.processfly.bpmn.template.element.Gateway;
-import com.olia.processfly.bpmn.template.impl.GatewayImpl;
+import com.olia.processflyer.shared.bpmn.template.element.Gateway;
+import com.olia.processflyer.shared.bpmn.template.impl.GatewayImpl;
 
 public class GatewayBuilder extends AbstractNodeBuilder<GatewayImpl, Gateway, GatewayBuilder> implements
         NodeBuilder<Gateway>

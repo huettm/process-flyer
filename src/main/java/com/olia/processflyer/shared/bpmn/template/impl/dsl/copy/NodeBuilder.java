@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.template.impl.dsl.copy;
+package com.olia.processflyer.shared.bpmn.template.impl.dsl.copy;
 
-import com.olia.processfly.bpmn.template.Node;
-import com.olia.processfly.bpmn.template.NodeType;
+import com.olia.processflyer.shared.bpmn.template.Node;
+import com.olia.processflyer.shared.bpmn.template.NodeType;
 
 /**
  * DOCME

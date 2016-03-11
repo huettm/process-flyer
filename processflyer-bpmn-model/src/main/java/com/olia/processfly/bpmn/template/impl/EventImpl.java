@@ -10,10 +10,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.template.impl;
+package com.olia.processflyer.shared.bpmn.template.impl;
 
-import com.olia.processfly.bpmn.template.element.Event;
-import com.olia.processfly.bpmn.template.element.EventType;
+import com.olia.processflyer.shared.bpmn.template.element.Event;
+import com.olia.processflyer.shared.bpmn.template.element.EventType;
 
 /**
  * DOCME

@@ -10,12 +10,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.template.impl.dsl;
+package com.olia.processflyer.shared.bpmn.template.impl.dsl;
 
 import javafx.geometry.Point3D;
 
-import com.olia.processfly.bpmn.template.RenderingInformation;
-import com.olia.processfly.bpmn.template.impl.RenderingInformationImpl;
+import com.olia.processflyer.shared.bpmn.template.RenderingInformation;
+import com.olia.processflyer.shared.bpmn.template.impl.RenderingInformationImpl;
 
 /**
  * DOCME

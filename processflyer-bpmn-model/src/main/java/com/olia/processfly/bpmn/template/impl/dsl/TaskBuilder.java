@@ -1,7 +1,7 @@
-package com.olia.processfly.bpmn.template.impl.dsl;
+package com.olia.processflyer.shared.bpmn.template.impl.dsl;
 
-import com.olia.processfly.bpmn.template.element.Task;
-import com.olia.processfly.bpmn.template.impl.TaskImpl;
+import com.olia.processflyer.shared.bpmn.template.element.Task;
+import com.olia.processflyer.shared.bpmn.template.impl.TaskImpl;
 
 public class TaskBuilder extends AbstractNodeBuilder<TaskImpl, Task, TaskBuilder> implements NodeBuilder<Task>
 {

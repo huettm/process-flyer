@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.instance.impl;
+package com.olia.processflyer.shared.bpmn.instance.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.olia.processfly.bpmn.template.Node;
-import com.olia.processfly.bpmn.template.NodeVisitor;
-import com.olia.processfly.bpmn.template.TemplateElement;
+import com.olia.processflyer.shared.bpmn.template.Node;
+import com.olia.processflyer.shared.bpmn.template.NodeVisitor;
+import com.olia.processflyer.shared.bpmn.template.TemplateElement;
 
 /**
  * DOCME

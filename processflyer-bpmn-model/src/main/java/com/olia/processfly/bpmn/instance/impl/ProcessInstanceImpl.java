@@ -10,18 +10,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.instance.impl;
+package com.olia.processflyer.shared.bpmn.instance.impl;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import com.olia.processfly.bpmn.instance.InstanceStatus;
-import com.olia.processfly.bpmn.instance.NodeInstance;
-import com.olia.processfly.bpmn.instance.ProcessInstance;
-import com.olia.processfly.bpmn.template.Node;
-import com.olia.processfly.bpmn.template.NodeType;
-import com.olia.processfly.bpmn.template.ProcessTemplate;
+import com.olia.processflyer.shared.bpmn.instance.InstanceStatus;
+import com.olia.processflyer.shared.bpmn.instance.NodeInstance;
+import com.olia.processflyer.shared.bpmn.instance.ProcessInstance;
+import com.olia.processflyer.shared.bpmn.template.Node;
+import com.olia.processflyer.shared.bpmn.template.NodeType;
+import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
 
 /**
  * DOCME

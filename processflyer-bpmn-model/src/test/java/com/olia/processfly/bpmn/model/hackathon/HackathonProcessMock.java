@@ -10,20 +10,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.model.hackathon;
+package com.olia.processflyer.shared.bpmn.model.hackathon;
 
-import static com.olia.processfly.bpmn.template.impl.dsl.ConnectionBuilder.to;
-import static com.olia.processfly.bpmn.template.impl.dsl.EventBuilder.Event;
-import static com.olia.processfly.bpmn.template.impl.dsl.GatewayBuilder.Gateway;
-import static com.olia.processfly.bpmn.template.impl.dsl.LabelBuilder.Label;
-import static com.olia.processfly.bpmn.template.impl.dsl.RenderInformationBuilder.Render;
-import static com.olia.processfly.bpmn.template.impl.dsl.TaskBuilder.Task;
+import static com.olia.processflyer.shared.bpmn.template.impl.dsl.ConnectionBuilder.to;
+import static com.olia.processflyer.shared.bpmn.template.impl.dsl.EventBuilder.Event;
+import static com.olia.processflyer.shared.bpmn.template.impl.dsl.GatewayBuilder.Gateway;
+import static com.olia.processflyer.shared.bpmn.template.impl.dsl.LabelBuilder.Label;
+import static com.olia.processflyer.shared.bpmn.template.impl.dsl.RenderInformationBuilder.Render;
+import static com.olia.processflyer.shared.bpmn.template.impl.dsl.TaskBuilder.Task;
 
-import com.olia.processfly.bpmn.template.ProcessTemplate;
-import com.olia.processfly.bpmn.template.impl.ProcessTemplateImpl;
-import com.olia.processfly.bpmn.template.impl.dsl.EventBuilder;
-import com.olia.processfly.bpmn.template.impl.dsl.GatewayBuilder;
-import com.olia.processfly.bpmn.template.impl.dsl.TaskBuilder;
+import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
+import com.olia.processflyer.shared.bpmn.template.impl.ProcessTemplateImpl;
+import com.olia.processflyer.shared.bpmn.template.impl.dsl.EventBuilder;
+import com.olia.processflyer.shared.bpmn.template.impl.dsl.GatewayBuilder;
+import com.olia.processflyer.shared.bpmn.template.impl.dsl.TaskBuilder;
 
 /**
  * DOCME

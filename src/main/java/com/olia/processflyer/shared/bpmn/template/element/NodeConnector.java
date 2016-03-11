@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.template.element;
+package com.olia.processflyer.shared.bpmn.template.element;
 
-import com.olia.processfly.bpmn.template.Identifiable;
-import com.olia.processfly.bpmn.template.Markable;
-import com.olia.processfly.bpmn.template.Node;
-import com.olia.processfly.bpmn.template.Renderable;
-import com.olia.processfly.bpmn.template.TemplateElement;
-import com.olia.processfly.bpmn.template.Visitable;
+import com.olia.processflyer.shared.bpmn.template.Identifiable;
+import com.olia.processflyer.shared.bpmn.template.Markable;
+import com.olia.processflyer.shared.bpmn.template.Node;
+import com.olia.processflyer.shared.bpmn.template.Renderable;
+import com.olia.processflyer.shared.bpmn.template.TemplateElement;
+import com.olia.processflyer.shared.bpmn.template.Visitable;
 
 /**
  * Connects two nodes.

@@ -12,16 +12,16 @@
  */
 package com.olia.processfly.bpmn.model.impl.dsl;
 
-import static com.olia.processfly.bpmn.template.impl.dsl.EventBuilder.Event;
-import static com.olia.processfly.bpmn.template.impl.dsl.TaskBuilder.Task;
+import static com.olia.processflyer.shared.bpmn.template.impl.dsl.EventBuilder.Event;
+import static com.olia.processflyer.shared.bpmn.template.impl.dsl.TaskBuilder.Task;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;
 
-import com.olia.processfly.bpmn.template.element.Event;
-import com.olia.processfly.bpmn.template.element.NodeConnector;
-import com.olia.processfly.bpmn.template.element.Task;
-import com.olia.processfly.bpmn.template.impl.dsl.ConnectionBuilder;
+import com.olia.processflyer.shared.bpmn.template.element.Event;
+import com.olia.processflyer.shared.bpmn.template.element.NodeConnector;
+import com.olia.processflyer.shared.bpmn.template.element.Task;
+import com.olia.processflyer.shared.bpmn.template.impl.dsl.ConnectionBuilder;
 
 public class ConnectionBuilderTest
 {

@@ -10,14 +10,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processfly.bpmn.instance;
+package com.olia.processflyer.shared.bpmn.instance;
 
 import java.util.Set;
 
-import com.olia.processfly.bpmn.template.Identifiable;
-import com.olia.processfly.bpmn.template.Node;
-import com.olia.processfly.bpmn.template.NodeType;
-import com.olia.processfly.bpmn.template.ProcessTemplate;
+import com.gargoylesoftware.htmlunit.javascript.host.Node;
+import com.olia.processflyer.shared.bpmn.template.Identifiable;
+import com.olia.processflyer.shared.bpmn.template.NodeType;
+import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
 
 /**
  * A template's process instance.

@@ -43,10 +43,4 @@ public interface InstanceStatus
      */
     String getMessage();
 
-    /**
-     * Some key/value properties.
-     * 
-     * @return
-     */
-    Properties getProperties();
 }

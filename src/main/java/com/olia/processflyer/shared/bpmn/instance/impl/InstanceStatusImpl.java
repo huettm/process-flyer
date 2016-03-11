@@ -26,8 +26,6 @@ import com.olia.processflyer.shared.bpmn.instance.InstanceStatusType;
 public class InstanceStatusImpl implements InstanceStatus
 {
 
-    private Properties properties;
-
     private String message;
 
     private InstanceStatusType status;
@@ -37,7 +35,6 @@ public class InstanceStatusImpl implements InstanceStatus
     public InstanceStatusImpl(String message, InstanceStatusType status, Date statusDate)
     {
         super();
-        this.properties = new Properties();
         this.message = message;
         this.status = status;
         this.statusDate = statusDate;
@@ -66,15 +63,5 @@ public class InstanceStatusImpl implements InstanceStatus
         return message;
     }
 
-    @Override
-    public Properties getProperties()
-    {
-        return properties;
-    }
-
-    public void addProperty(String key, Object value)
-    {
-        properties.put(key, value);
-    }
 
 }

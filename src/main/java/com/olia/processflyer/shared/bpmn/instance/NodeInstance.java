@@ -12,8 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.instance;
 
-import java.util.Properties;
-
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Identifiable;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
@@ -23,7 +22,7 @@ import com.olia.processflyer.shared.bpmn.template.NodeType;
  *
  * @author Philipp Kanne
  */
-public interface NodeInstance extends Identifiable
+public interface NodeInstance extends Identifiable, IsSerializable
 {
     /**
      * The referenced node.
@@ -42,10 +41,4 @@ public interface NodeInstance extends Identifiable
      */
     InstanceStatus getStatus();
 
-    /**
-     * Instance properties.
-     * 
-     * @return
-     */
-    Properties getProperties();
 }

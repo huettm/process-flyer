@@ -22,6 +22,7 @@ import com.olia.processflyer.shared.bpmn.instance.NodeInstance;
 import com.olia.processflyer.shared.bpmn.instance.ProcessInstance;
 import com.olia.processflyer.shared.bpmn.instance.impl.ApplyStatusToNodeInstanceCommand;
 import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceFactory;
+import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceImpl;
 import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceStatusResolver;
 import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
 
@@ -40,8 +41,8 @@ public class HackathonDungleMock {
 				new ApplyStatusToNodeInstanceCommand(new NullStatusResolver()));
 	}
 
-	public Collection<ProcessInstance> createDungle(int amount) {
-		Set<ProcessInstance> result = new HashSet<ProcessInstance>();
+	public Collection<ProcessInstanceImpl> createDungle(int amount) {
+		Set<ProcessInstanceImpl> result = new HashSet<ProcessInstanceImpl>();
 
 		ProcessTemplate template = hackatonTemplate.createTemplate();
 		for (int i = 0; i < amount; i++) {

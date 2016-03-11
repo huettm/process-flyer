@@ -16,12 +16,14 @@ import static com.olia.processflyer.shared.bpmn.template.impl.dsl.RenderInformat
 import static com.olia.processflyer.shared.bpmn.template.impl.dsl.TaskBuilder.Task;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.olia.processflyer.shared.bpmn.template.Point;
 import com.olia.processflyer.shared.bpmn.template.element.Task;
 import com.olia.processflyer.shared.bpmn.template.impl.dsl.TaskBuilder;
 
+@Ignore
 public class NodeRenderingDataTest
 {
 

@@ -32,6 +32,9 @@ import thothbot.parallax.core.shared.math.Color;
 import thothbot.parallax.core.shared.math.Vector2;
 import thothbot.parallax.core.shared.math.Vector3;
 import thothbot.parallax.core.shared.objects.Mesh;
+import com.olia.processflyer.shared.SceneUpdaterService;
+import com.olia.processflyer.shared.SceneUpdaterServiceAsync;
+
 
 /**
  *
@@ -47,7 +50,7 @@ public class MyScene extends AnimatedScene {
 
     private static final String imageLocation = "Tulips.jpg";
 
-    //private TextRendererServiceAsync textRenderService = GWT.create(TextRendererService.class);
+    private SceneUpdaterServiceAsync sceneUpdater = GWT.create(TextRendererService.class);
 
     FirstPersonControls controls;
     
@@ -60,7 +63,12 @@ public class MyScene extends AnimatedScene {
                 1, // near
                 1000 // far 
         );
-
+        
+        if(sceneUpdater==null) {
+    		sceneUpdater=GWT.create(SceneUpdaterService.class);
+    	}
+       
+                
         camera.getPosition().setZ(600);
         //this.controls = new FirstPersonControls( camera, getCanvas() );
         

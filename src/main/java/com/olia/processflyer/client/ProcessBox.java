@@ -5,6 +5,7 @@
  */
 package com.olia.processflyer.client;
 
+import com.olia.processflyer.shared.bpmn.template.impl.ProcessTemplateImpl;
 import java.util.ArrayList;
 import java.util.List;
 import thothbot.parallax.core.shared.core.Geometry;
@@ -41,7 +42,9 @@ public class ProcessBox {
     
     private int distance = 150;
     
+    
     public void loadProcessDefinition() {
+        
         processObjects.add(new SphereGeometry(radius, width, height));
         processObjects.add(new BoxGeometry(100, width, height));
         processObjects.add(new BoxGeometry(100, width, height));

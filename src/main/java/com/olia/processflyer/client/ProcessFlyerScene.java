@@ -92,7 +92,7 @@ public class ProcessFlyerScene extends AnimatedScene {
 				40, // field of view
 				getRenderer().getAbsoluteAspectRation(), // aspect ratio
 				1, // near
-				2000 // far
+				4000 // far
 		);
 
 		if (sceneUpdater == null) {
@@ -157,7 +157,7 @@ public class ProcessFlyerScene extends AnimatedScene {
 				processBox.getPosition().add(new Vector3(processLaneXPosition, 0, depth));
 				depth = depth + 100;
 				for (VisualProcessObject processElement : processBox.processObjects) {
-					Mesh myNewMesh = new Mesh(processElement.getGeometry(), m_materialLines);
+					Mesh myNewMesh = new Mesh(processElement.getGeometry(), m_defaultMaterial);
 					myNewMesh.setPosition(processElement.getPosition().add(processBox.getPosition()));
 					Vector3 myPos = myNewMesh.getPosition();
 					myMin.min(myPos);
@@ -176,7 +176,8 @@ public class ProcessFlyerScene extends AnimatedScene {
 		getScene().add(m_meshLinesBounding);
 		Vector3 myKorV = mySz.divide(2.0d);
 		for (Mesh myMesh : m_currentGeometries) {
-			myMesh.setPosition(myMesh.getPosition().sub(myKorV));
+			myMesh.setPosition(myMesh.getPosition().sub(new Vector3(-myKorV.getX(),myKorV.getY(),2*myKorV.getZ())));
+			getScene().add(myMesh);
 		}
 		LOG.log(Level.INFO, "ProcFlyer Consume scene");
 		m_currentProcesses = null;

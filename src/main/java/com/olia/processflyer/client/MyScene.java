@@ -74,7 +74,7 @@ public class MyScene extends AnimatedScene {
     	if(sceneUpdater==null) {
     		sceneUpdater=GWT.create(SceneUpdaterService.class);
     	}
-    	sceneUpdater.getProcessInstances(callback);
+    	//sceneUpdater.getProcessInstances(callback);
     	
         camera.getPosition().setZ(600);
 //        this.controls = new FirstPersonControls( camera, getCanvas() );
@@ -113,26 +113,24 @@ public class MyScene extends AnimatedScene {
         processesMap.put("Hackaton_Process", p);
         ProcessBox process2 = new ProcessBox();
         process2.loadProcessDefinition(HackathonProcessMock.createTemplate());
-        List<ProcessBox> p2 = new ArrayList<>();
-        p2.add(process2);        
-        processesMap.put("Hackaton_Process", p2);
-        
+        processesMap.get("Hackaton_Process").add(process2);
+        GWT.log("Heloo");
         //Processlanes starten links von der Mitte und werden nach rechts erweitert
         int processLaneXPosition = -1200;
         for(Entry<String,List<ProcessBox>> entry: processesMap.entrySet()) {
             GWT.log("Displaying all processes for template: " + entry.getKey());            
-            int depth = 0;
+            int depth = 1000;
             for(ProcessBox processBox: entry.getValue()) {
                 GWT.log("ProcessBox at depth " + depth);
                 processBox.getPosition().add(new Vector3(processLaneXPosition, 0, depth));
-                depth = depth + processBox.getDistance();
+                depth = depth + 100;
                 for(VisualProcessObject processElement: processBox.processObjects) {
                     Mesh currentMesh = new Mesh(processElement.getGeometry(), material);
                     currentMesh.setPosition(processElement.getPosition().add(processBox.getPosition()));                    
                     getScene().add(currentMesh);
                 }
             }
-            processLaneXPosition = processLaneXPosition + 100;
+            processLaneXPosition = processLaneXPosition + 200;
         }
         
     }

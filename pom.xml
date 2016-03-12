@@ -1,111 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-    xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.olia.processfly</groupId>
-    <artifactId>process-flyer</artifactId>
-    <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
-    <name>OLIA Process Flyer</name>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.olia.processfly</groupId>
+	<artifactId>process-flyer</artifactId>
+	<packaging>war</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>OLIA Process Flyer</name>
 
-    <properties>
-        <!-- Convenience property to set the GWT version -->
-        <gwtVersion>2.8.0-beta1</gwtVersion>
+	<properties>
+		<!-- Convenience property to set the GWT version -->
+		<gwtVersion>2.8.0-beta1</gwtVersion>
 
-        <!-- GWT needs at least java 1.7 -->
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+		<!-- GWT needs at least java 1.7 -->
+		<maven.compiler.source>1.7</maven.compiler.source>
+		<maven.compiler.target>1.7</maven.compiler.target>
 
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<gaeVersion>1.9.3</gaeVersion>
+		<datanucleusVersion>1.1.5</datanucleusVersion>
+		<slf4jVersion>1.5.11</slf4jVersion>
+		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+	</properties>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.google.gwt</groupId>
-                <artifactId>gwt</artifactId>
-                <version>${gwtVersion}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.gwt</groupId>
+				<artifactId>gwt</artifactId>
+				<version>${gwtVersion}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-servlet</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-dev</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.3.0</version>
-            <scope>test</scope>
-        </dependency>	
+	<dependencies>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-dev</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>3.3.0</version>
+			<scope>test</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.9.5</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.parallax3d</groupId>
-            <artifactId>parallax</artifactId>
-            <version>1.6</version>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<version>1.9.5</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.parallax3d</groupId>
+			<artifactId>parallax</artifactId>
+			<version>1.6</version>
+		</dependency>
+		<dependency>
+			<!-- this library provides the core appengine features -->
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-1.0-sdk</artifactId>
+			<version>${gaeVersion}</version>
+		</dependency>
+		<dependency>
+			<!-- this library provides experimental appengine features -->
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-labs</artifactId>
+			<version>${gaeVersion}</version>
+		</dependency>
+		<dependency>
+			<!-- required for app engine based unit tests -->
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-testing</artifactId>
+			<version>${gaeVersion}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<!-- required for app engine based unit tests -->
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-api-stubs</artifactId>
+			<version>${gaeVersion}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<!-- required for app engine based unit tests -->
+			<groupId>com.google.appengine</groupId>
+			<artifactId>appengine-tools-sdk</artifactId>
+			<version>${gaeVersion}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<!-- Google App Engine supports both JPA1 and JPA2. JPA1: datanucleus 
+				appengine plugin v1 (1.0.10) + datanucleus v1 (1.1.5) JPA2: datanucleus appengine 
+				plugin v2 (2.1.1) + datanucleus v3 (3.1.1) -->
+			<groupId>com.google.appengine.orm</groupId>
+			<artifactId>datanucleus-appengine</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+		<dependency>
+			<!-- datanucleus-core is not needed for compilation. in fact, it cannot 
+				have compile scope because the datanucleus plugin automatically adds it during 
+				enhancement and complains if there are two copies. app should not depend 
+				on any classes in this lib anyways. -->
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-core</artifactId>
+			<version>${datanucleusVersion}</version>
+			<scope>runtime</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.transaction</groupId>
+					<artifactId>transaction-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<!-- datanucleus-jpa is needed during compilation for its @Extension annotation 
+				which is used throughout entity classes -->
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-jpa</artifactId>
+			<version>${datanucleusVersion}</version>
+		</dependency>
+		<dependency>
+			<!-- normally this library is only needed when using JDO however datanucleus 
+				throws some JDO exceptions even when using JPA. there are several places 
+				in our code that explicitly catch these JDO exceptions therefore it is needed 
+				during compilation -->
+			<groupId>javax.jdo</groupId>
+			<artifactId>jdo2-api</artifactId>
+			<version>2.3-eb</version>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.transaction</groupId>
+					<artifactId>transaction-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!-- End Google App Engine libraries -->
+	</dependencies>
 
-    <build>
-        <!-- Output classes directly into the webapp, so that IDEs and "mvn process-classes" update them in DevMode -->
-        <outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
+	<build>
+		<!-- Output classes directly into the webapp, so that IDEs and "mvn process-classes" 
+			update them in DevMode -->
+		<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/classes</outputDirectory>
 
-        <plugins>
+		<plugins>
 
-            <!-- Mojo's Maven Plugin for GWT -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>gwt-maven-plugin</artifactId>
-                <version>2.8.0-beta1</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>test</goal>
-<!--                             <goal>generateAsync</goal>
- -->                        </goals>
-                    </execution>
-                </executions>
-                <!-- Plugin configuration. There are many available options, see 
-                gwt-maven-plugin documentation at codehaus.org -->
-                <configuration>
-                    <runTarget>ProcessFlyer.html</runTarget>
-                    <modules>
-                        <module>com.olia.processflyer.ProcessFlyer</module>
-                    </modules>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+			<!-- Mojo's Maven Plugin for GWT -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>2.8.0-beta1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>test</goal>
+							<!-- <goal>generateAsync</goal> -->
+						</goals>
+					</execution>
+				</executions>
+				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
+					documentation at codehaus.org -->
+				<configuration>
+					<runTarget>ProcessFlyer.html</runTarget>
+					<modules>
+						<module>com.olia.processflyer.ProcessFlyer</module>
+					</modules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

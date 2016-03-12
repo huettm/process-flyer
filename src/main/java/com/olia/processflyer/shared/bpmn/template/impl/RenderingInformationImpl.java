@@ -12,12 +12,12 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.olia.processflyer.shared.bpmn.template.Point;
 import com.olia.processflyer.shared.bpmn.template.RenderingInformation;
 import com.olia.processflyer.shared.bpmn.template.TemplateElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * DOCME
@@ -55,6 +55,19 @@ public class RenderingInformationImpl implements RenderingInformation
     public Point getStartPosition()
     {
         return startPosition;
+    }
+
+    /**
+     * The center of a node.
+     *
+     * @return
+     */
+    @Override
+    public Point getCenterPosition() {
+        return new Point(
+                (startPosition.getX()+endPosition.getX())/2,
+                (startPosition.getY()+endPosition.getY())/2,
+                (startPosition.getZ()+endPosition.getZ())/2);
     }
 
     @Override

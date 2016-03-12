@@ -36,6 +36,13 @@ public interface RenderingInformation
     Point getStartPosition();
 
     /**
+     * The center of a node.
+     *
+     * @return
+     */
+    Point getCenterPosition();
+
+    /**
      * The lower right corner of node.
      * 
      * @return

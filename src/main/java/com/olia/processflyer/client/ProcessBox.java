@@ -5,6 +5,9 @@
  */
 package com.olia.processflyer.client;
 
+import com.olia.processflyer.shared.bpmn.template.Node;
+import com.olia.processflyer.shared.bpmn.template.NodeElementType;
+import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
 import com.olia.processflyer.shared.bpmn.template.impl.ProcessTemplateImpl;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +33,7 @@ public class ProcessBox {
         return distance;
     }
     
-    List<Geometry> processObjects = new ArrayList<>();
+    List<VisualProcessObject> processObjects = new ArrayList<>();
     
     private double radius = 50;
     
@@ -43,17 +46,12 @@ public class ProcessBox {
     private int distance = 150;
     
     
-    public void loadProcessDefinition() {
-        
-        processObjects.add(new SphereGeometry(radius, width, height));
-        processObjects.add(new BoxGeometry(100, width, height));
-        processObjects.add(new BoxGeometry(100, width, height));
-        processObjects.add(new OctahedronGeometry(radius, 0));
-        processObjects.add(new BoxGeometry(width, height, depth));
-        processObjects.add(new BoxGeometry(width, height, depth));
-        processObjects.add(new OctahedronGeometry(radius, 0));
-        processObjects.add(new BoxGeometry(width, height, depth));
-        processObjects.add(new SphereGeometry(radius, width, height));        
+    public void loadProcessDefinition(ProcessTemplate processTemplate) {
+        List<Node<?>> processNodeList = processTemplate.getAllNodes();
+        for(Node processNode: processNodeList) {            
+            Vector3 nodePosition = new Vector3(processNode.getRenderingData().getStartPosition().getX(), processNode.getRenderingData().getStartPosition().getY(), processNode.getRenderingData().getStartPosition().getZ());
+            processObjects.add(new VisualProcessObject(processNode.getElementType(), nodePosition));
+        }            
     }
     
     

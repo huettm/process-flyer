@@ -12,6 +12,8 @@
  */
 package com.olia.processflyer.shared.bpmn.template;
 
+import java.util.List;
+
 /**
  * DOCME
  *
@@ -22,4 +24,6 @@ public interface ProcessTemplate
     Node<? extends NodeType> getRootNode();
 
     String getName();
+    
+    public List<Node<?>> getAllNodes();
 }

@@ -11,6 +11,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.olia.processflyer.shared.SceneUpdaterService;
 import com.olia.processflyer.shared.SceneUpdaterServiceAsync;
+import com.olia.processflyer.shared.bpmn.instance.HackathonProcessMock;
 import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceImpl;
 
 import thothbot.parallax.core.client.AnimatedScene;
@@ -28,8 +29,7 @@ import thothbot.parallax.core.shared.objects.Mesh;
  * @author HUETTM
  */
 public class MyScene extends AnimatedScene {
-
-
+    
     PerspectiveCamera camera;
 
     private String imageAsString;
@@ -41,6 +41,8 @@ public class MyScene extends AnimatedScene {
     FirstPersonControls controls;
     
     private SceneUpdaterServiceAsync sceneUpdater;
+    
+    Collection<ProcessInstanceImpl> result = null;
 
     AsyncCallback<Collection<ProcessInstanceImpl>> callback = new AsyncCallback<Collection<ProcessInstanceImpl>>() {
         public void onFailure(Throwable caught) {
@@ -74,49 +76,14 @@ public class MyScene extends AnimatedScene {
         material.setSide(Material.SIDE.DOUBLE);
         
         ProcessBox process = new ProcessBox();
-        process.loadProcessDefinition();
-        process.getPosition().addX(300);
         
-        for(Geometry object: process.processObjects) {
-            getScene().add(new Mesh(object, material));          
+        process.loadProcessDefinition(HackathonProcessMock.createTemplate());
+               
+        for(VisualProcessObject obj: process.processObjects) {
+            Mesh currentMesh = new Mesh(obj.getGeometry(), material);
+            currentMesh.setPosition(obj.getPosition().add(process.getPosition()));
+            getScene().add(currentMesh);
         }
-        
-        for(int i = 0; i < getScene().getChildren().size(); i++) {
-            int newX = 0;
-            if(i != 0) {
-                newX = i * process.getDistance() + Double.valueOf(process.getPosition().getX()).intValue();
-            }
-            getScene().getChildren().get(i).getPosition().addX(-1 * newX);
-        }
-
-//        SphereGeometry startPoint = new SphereGeometry(50, 100, 100);        
-//
-//        Mesh mesh1 = new Mesh(startPoint, material);
-//
-//        BoxGeometry processStep1 = new BoxGeometry(100, 100, 100);
-//       
-//        Mesh mesh2 = new Mesh(processStep1, material);
-//
-////        DirectionalLight dirLight = new DirectionalLight(0xffffff, 1.0);
-////        dirLight.getPosition().set(0, 100, 0);
-////        getScene().add(dirLight);
-        //getScene().add(mesh1);
-//        getScene().add(mesh2);
-//        Vector3 spherePosition = mesh1.getPosition();
-//        spherePosition.addX(200.0);       
-//
-////        AmbientLight ambLight = new AmbientLight(0xffffff);
-////        getScene().add(ambLight);
-//        OctahedronGeometry gateway = new OctahedronGeometry(
-//                50, // Sets the radius of octahedron 
-//                0 // Sets the frequency of decomposition
-//        );
-//
-//        Mesh gateWayMesh = new Mesh(gateway, material);
-//
-//        getScene().add(gateWayMesh);
-//
-//        gateWayMesh.getPosition().addX(-200);
     }
 
     @Override

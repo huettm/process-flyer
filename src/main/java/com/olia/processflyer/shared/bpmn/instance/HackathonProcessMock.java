@@ -32,7 +32,7 @@ import com.olia.processflyer.shared.bpmn.template.impl.dsl.TaskBuilder;
  */
 public class HackathonProcessMock
 {
-    public ProcessTemplate createTemplate()
+    public static ProcessTemplate createTemplate()
     {
         EventBuilder StartEvent_1 = Event()
                 .identifiedBy("StartEvent_1")

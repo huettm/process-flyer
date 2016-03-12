@@ -47,7 +47,7 @@ public class ProcessInstanceFactory
             NodeInstance newInstance = new NodeInstanceImpl(node, UUID.randomUUID().toString());
             applyStatusCommand.run(newInstance);
 
-            instance.addNodeInstance(newInstance);
+//            instance.addNodeInstance(newInstance);
         }
 
         return instance;

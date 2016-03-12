@@ -3,16 +3,21 @@
  */
 package com.olia.processflyer.shared.bpmn.template;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * @author philipp
  *
  */
-public class Point {
+public class Point implements IsSerializable{
 
 	private double x;
 	private double y;
 	private double z;
 
+	public Point() {
+		x=0;y=0;z=0;
+	}
 	public Point(double x, double y, double z) {
 		super();
 		this.x = x;

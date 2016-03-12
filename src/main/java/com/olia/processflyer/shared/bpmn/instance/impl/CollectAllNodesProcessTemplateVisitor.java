@@ -15,6 +15,7 @@ package com.olia.processflyer.shared.bpmn.instance.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeVisitor;
 import com.olia.processflyer.shared.bpmn.template.TemplateElement;
@@ -24,10 +25,12 @@ import com.olia.processflyer.shared.bpmn.template.TemplateElement;
  *
  * @author Philipp Kanne
  */
-public class CollectAllNodesProcessTemplateVisitor implements NodeVisitor
+public class CollectAllNodesProcessTemplateVisitor implements NodeVisitor, IsSerializable
 {
     private List<Node<?>> allNodes = new ArrayList<Node<?>>();
 
+    public CollectAllNodesProcessTemplateVisitor(){}
+    
     @Override
     public void visit(TemplateElement theElement)
     {

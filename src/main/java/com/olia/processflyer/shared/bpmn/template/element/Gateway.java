@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.element;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Node;
 
 /**
@@ -20,7 +21,7 @@ import com.olia.processflyer.shared.bpmn.template.Node;
  * @see https://camunda.org/bpmn/reference/#gateways-data-based-exclusive-gateways
  * @author Philipp Kanne
  */
-public interface Gateway extends Node<GatewayType>
+public interface Gateway extends Node<GatewayType>, IsSerializable
 {
 
 }

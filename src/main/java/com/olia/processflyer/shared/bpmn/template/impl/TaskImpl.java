@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.NodeElementType;
 import com.olia.processflyer.shared.bpmn.template.element.Task;
 import com.olia.processflyer.shared.bpmn.template.element.TaskType;
@@ -21,7 +22,7 @@ import com.olia.processflyer.shared.bpmn.template.element.TaskType;
  *
  * @author Philipp Kanne
  */
-public class TaskImpl extends AbstractBaseNode<TaskType> implements Task
+public class TaskImpl extends AbstractBaseNode<TaskType> implements Task, IsSerializable
 {
 
     private String name;

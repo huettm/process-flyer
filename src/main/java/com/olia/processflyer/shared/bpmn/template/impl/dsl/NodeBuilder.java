@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl.dsl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
 
@@ -20,7 +21,7 @@ import com.olia.processflyer.shared.bpmn.template.NodeType;
  *
  * @author Philipp Kanne
  */
-public interface NodeBuilder<T extends Node<? extends NodeType>>
+public interface NodeBuilder<T extends Node<? extends NodeType>> extends IsSerializable
 {
     T node();
 }

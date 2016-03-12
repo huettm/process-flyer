@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl.dsl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Point;
 import com.olia.processflyer.shared.bpmn.template.RenderingInformation;
 import com.olia.processflyer.shared.bpmn.template.impl.RenderingInformationImpl;
@@ -23,11 +24,11 @@ import javafx.geometry.Point3D;
  *
  * @author Philipp Kanne
  */
-public class RenderInformationBuilder
+public class RenderInformationBuilder implements IsSerializable
 {
     private RenderingInformationImpl data;
 
-    private RenderInformationBuilder()
+    public RenderInformationBuilder()
     {
         data = new RenderingInformationImpl();
     }

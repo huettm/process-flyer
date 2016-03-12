@@ -11,5 +11,5 @@ import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceImpl;
  *
  */
 public interface SceneUpdaterServiceAsync {
-	void getProcessInstances(AsyncCallback<Collection<ProcessInstanceImpl> > pCallback);
+	void getProcessInstances(AsyncCallback<ProcessInstanceImpl[] > pCallback);
 }

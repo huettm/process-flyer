@@ -15,12 +15,14 @@ package com.olia.processflyer.shared.bpmn.instance;
 import java.util.Date;
 import java.util.Properties;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * The instance status.
  *
  * @author Philipp Kanne
  */
-public interface InstanceStatus
+public interface InstanceStatus extends IsSerializable
 {
     /**
      * Statusdate.

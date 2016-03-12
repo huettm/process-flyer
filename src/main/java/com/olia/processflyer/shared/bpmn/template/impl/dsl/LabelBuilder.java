@@ -1,9 +1,10 @@
 package com.olia.processflyer.shared.bpmn.template.impl.dsl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.element.Label;
 import com.olia.processflyer.shared.bpmn.template.impl.LabelImpl;
 
-public class LabelBuilder extends AbstractNodeBuilder<LabelImpl, Label, LabelBuilder> implements NodeBuilder<Label>
+public class LabelBuilder extends AbstractNodeBuilder<LabelImpl, Label, LabelBuilder> implements NodeBuilder<Label>, IsSerializable
 {
     private LabelBuilder()
     {

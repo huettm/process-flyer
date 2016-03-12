@@ -14,6 +14,7 @@ package com.olia.processflyer.shared.bpmn.template.impl;
 
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.instance.impl.CollectAllNodesProcessTemplateVisitor;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
@@ -24,11 +25,16 @@ import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
  *
  * @author Philipp Kanne
  */
-public class ProcessTemplateImpl implements ProcessTemplate {
-	private final Node<? extends NodeType> root;
+public class ProcessTemplateImpl implements ProcessTemplate, IsSerializable {
+	private Node<? extends NodeType> root;
 
-	private final String name;
+	private String name;
 
+	ProcessTemplateImpl(){
+		name="";
+		root=null;
+	}
+	
 	public ProcessTemplateImpl(Node<? extends NodeType> root, String name) {
 		super();
 		this.root = root;

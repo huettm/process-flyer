@@ -15,6 +15,7 @@ package com.olia.processflyer.shared.bpmn.instance.impl;
 import java.util.Date;
 import java.util.Properties;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.instance.InstanceStatus;
 import com.olia.processflyer.shared.bpmn.instance.InstanceStatusType;
 
@@ -23,7 +24,7 @@ import com.olia.processflyer.shared.bpmn.instance.InstanceStatusType;
  *
  * @author Philipp Kanne
  */
-public class InstanceStatusImpl implements InstanceStatus
+public class InstanceStatusImpl implements InstanceStatus, IsSerializable
 {
 
     private String message;
@@ -32,6 +33,7 @@ public class InstanceStatusImpl implements InstanceStatus
 
     private Date statusDate;
 
+    InstanceStatusImpl(){}
     public InstanceStatusImpl(String message, InstanceStatusType status, Date statusDate)
     {
         super();

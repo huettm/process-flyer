@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
 import com.olia.processflyer.shared.bpmn.template.NodeVisitor;
@@ -25,7 +26,7 @@ import com.olia.processflyer.shared.bpmn.template.element.NodeConnectorType;
  *
  * @author Philipp Kanne
  */
-public class NodeConnectorImpl implements NodeConnector
+public class NodeConnectorImpl implements NodeConnector, IsSerializable
 {
 
     private String uniqueIdentifier;

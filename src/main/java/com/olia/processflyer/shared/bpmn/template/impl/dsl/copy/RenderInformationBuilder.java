@@ -27,7 +27,7 @@ public class RenderInformationBuilder
 {
     private RenderingInformationImpl data;
 
-    private RenderInformationBuilder()
+    public RenderInformationBuilder()
     {
         data = new RenderingInformationImpl();
     }

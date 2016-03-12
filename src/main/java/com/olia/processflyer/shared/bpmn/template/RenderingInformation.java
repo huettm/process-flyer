@@ -14,12 +14,14 @@ package com.olia.processflyer.shared.bpmn.template;
 
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * Information for rendering a node.
  *
  * @author Philipp Kanne
  */
-public interface RenderingInformation
+public interface RenderingInformation extends IsSerializable
 {
     /**
      * The referenced template element.

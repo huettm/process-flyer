@@ -12,11 +12,13 @@
  */
 package com.olia.processflyer.shared.bpmn.instance;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * All status types for an instance.
  *
  * @author Philipp Kanne
  */
-public enum InstanceStatusType {
+public enum InstanceStatusType implements IsSerializable{
     None, Started, Error, Failed
 }

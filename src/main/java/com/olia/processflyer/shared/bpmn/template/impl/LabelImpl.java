@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.NodeElementType;
 import com.olia.processflyer.shared.bpmn.template.element.Label;
 import com.olia.processflyer.shared.bpmn.template.element.LabelType;
@@ -21,7 +22,7 @@ import com.olia.processflyer.shared.bpmn.template.element.LabelType;
  *
  * @author Philipp Kanne
  */
-public class LabelImpl extends AbstractBaseNode<LabelType> implements Label
+public class LabelImpl extends AbstractBaseNode<LabelType> implements Label, IsSerializable
 {
 
     private String text;

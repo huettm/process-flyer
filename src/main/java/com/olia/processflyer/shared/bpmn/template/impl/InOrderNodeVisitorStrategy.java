@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
 import com.olia.processflyer.shared.bpmn.template.NodeVisitor;
@@ -22,7 +23,7 @@ import com.olia.processflyer.shared.bpmn.template.element.NodeConnector;
  *
  * @author Philipp Kanne
  */
-public class InOrderNodeVisitorStrategy implements NodeVisitorStrategy
+public class InOrderNodeVisitorStrategy implements NodeVisitorStrategy, IsSerializable
 {
     private final Node<? extends NodeType> theRoot;
 

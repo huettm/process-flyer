@@ -196,8 +196,8 @@ public class ProcessFlyerScene extends AnimatedScene {
 	@Override
 	protected void onUpdate(double duration) {
 		processSceneUpdate();
-		camera.getPosition().addX((-mouseX - camera.getPosition().getX()) * 0.05);
-		camera.getPosition().addY((mouseY - camera.getPosition().getY()) * 0.05);
+		camera.getPosition().addX((-mouseX - camera.getPosition().getX()/2) * 0.1);
+		camera.getPosition().addY((mouseY - camera.getPosition().getY()/2) * 0.1);
 		camera.lookAt(getScene().getPosition());
 
 		// Called when the animation should be updated.

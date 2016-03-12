@@ -22,32 +22,37 @@ import com.olia.processflyer.shared.bpmn.template.element.EventType;
  *
  * @author Philipp Kanne
  */
-public class EventImpl extends AbstractBaseNode<EventType> implements Event, IsSerializable
-{
+public class EventImpl extends AbstractBaseNode<EventType> implements Event, IsSerializable {
 
-    public EventImpl()
-    {
-        super();
-    }
+	private boolean startNode = false;
+	private boolean endNode = false;
 
-    @Override
-    public boolean isStartNode()
-    {
-        // TODO
-        return false;
-    }
+	public EventImpl() {
+		super();
+	}
 
-    @Override
-    public boolean isEndNode()
-    {
-        // TODO
-        return false;
-    }
-    
-    @Override
+	@Override
+	public boolean isStartNode() {
+		return startNode;
+	}
+
+	@Override
+	public boolean isEndNode() {
+		return endNode;
+	}
+
+	public void setStartNode(boolean startNode) {
+		this.startNode = startNode;
+	}
+
+	@Override
 	public NodeElementType getElementType() {
 
 		return NodeElementType.Event;
+	}
+
+	public void setEndNode(boolean endNode) {
+		this.endNode = endNode;
 	}
 
 }

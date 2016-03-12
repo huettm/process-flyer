@@ -25,119 +25,108 @@ import com.olia.processflyer.shared.bpmn.template.TemplateElement;
  *
  * @author Philipp Kanne
  */
-public class RenderingInformationImpl implements RenderingInformation, IsSerializable
-{
-    private TemplateElement element;
 
-    private List<Point> waypoints = new ArrayList<Point>();
+public class RenderingInformationImpl implements RenderingInformation, IsSerializable {
+	private TemplateElement element;
 
-    private Point startPosition = new Point(0d, 0d, 0d);
+	private List<Point> waypoints = new ArrayList<Point>();
 
-    private Point endPosition = new Point(0d, 0d, 0d);
+	private Point startPosition;// = new Point(0d, 0d, 0d);
 
-    private double width;
+	private Point endPosition;// = new Point(0d, 0d, 0d);
 
-    private double height;
+	private double width;
 
-    private double depth;
+	private double height;
 
-    public RenderingInformationImpl(){}
-    
-    @Override
-    public TemplateElement getElement()
-    {
-        return element;
-    }
+	public RenderingInformationImpl() {
+	}
 
-    public void setElement(TemplateElement element)
-    {
-        this.element = element;
-    }
+	@Override
+	public TemplateElement getElement() {
+		return element;
+	}
 
-    @Override
-    public Point getStartPosition()
-    {
-        return startPosition;
-    }
+	private double depth;
 
-    @Override
-    public Point getEndPosition()
-    {
-        return endPosition;
-    }
+	public void setElement(TemplateElement element) {
+		this.element = element;
+	}
 
-    @Override
-    public List<Point> getWayPoints()
-    {
-        return waypoints;
-    }
+	@Override
+	public Point getStartPosition() {
+		return startPosition;
+	}
 
-    @Override
-    public double getWidth()
-    {
-        return width;
-    }
+	@Override
+	public Point getEndPosition() {
+		return endPosition;
+	}
 
-    @Override
-    public double getHeight()
-    {
-        return height;
-    }
+	@Override
+	public List<Point> getWayPoints() {
+		return waypoints;
+	}
 
-    @Override
-    public double getDepth()
-    {
-        return depth;
-    }
+	@Override
+	public double getWidth() {
+		return width;
+	}
 
-    public boolean addWaypoint(Point waypoint)
-    {
-        if (waypoint == null)
-        {
-            return false;
-        }
-        return waypoints.add(waypoint);
-    }
+	@Override
+	public double getHeight() {
+		return height;
+	}
 
-    public void setStartPosition(Point startPosition)
-    {
-        this.startPosition = startPosition;
-    }
+	@Override
+	public double getDepth() {
+		return depth;
+	}
 
-    public void setEndPosition(Point endPosition)
-    {
-        this.endPosition = endPosition;
-    }
+	public boolean addWaypoint(Point waypoint) {
+		if (waypoint == null) {
+			return false;
+		}
+		return waypoints.add(waypoint);
+	}
 
-    public void setWidth(double width)
-    {
-        this.width = width;
-    }
+	public void setStartPosition(Point startPosition) {
+		this.startPosition = startPosition;
+		if (endPosition != null) {
+			calculateDiff();
+		} else {
+			endPosition = startPosition.add(new Point(width, height, depth));
+		}
+	}
 
-    public void setHeight(double height)
-    {
-        this.height = height;
-    }
+	public void setEndPosition(Point endPosition) {
+		this.endPosition = endPosition;
+		if (startPosition != null) {
+			calculateDiff();
+		} else {
+			startPosition = endPosition.subtract(new Point(width, height, depth));
+		}
+	}
 
-    public void setDepth(double depth)
-    {
-        this.depth = depth;
-    }
+	private void calculateDiff() {
+		width = Math.abs(endPosition.getX() - startPosition.getX());
+		height = Math.abs(endPosition.getY() - startPosition.getY());
+		depth = Math.abs(endPosition.getZ() - startPosition.getZ());
+	}
 
-    @Override
-    public String toString()
-    {
-        return "Rendering [start="
-                + startPosition
-                + ", end="
-                + endPosition
-                + ", width="
-                + width
-                + ", height="
-                + height
-                + ", depth="
-                + depth
-                + "]";
-    }
+	public void calculateStartAndEndFromWaypoints() {
+		if (waypoints.isEmpty()) {
+			return;
+		}
+		setStartPosition(waypoints.get(0).createCopy());
+		setEndPosition(waypoints.get(waypoints.size() - 1).createCopy());
+
+	}
+
+	@Override
+	public String toString() {
+		return "Rendering [start=" + startPosition + ", end=" + endPosition + ", width=" + width + ", height=" + height
+				+ ", depth=" + depth + "]";
+	}
 
 }

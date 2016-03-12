@@ -21,5 +21,5 @@ import com.olia.processflyer.shared.bpmn.template.NodeType;
  * @author Philipp Kanne
  */
 public enum GatewayType implements NodeType, IsSerializable {
-    Exklusive, Parallel, Inklusive, Event_based
+    Unknown,Exklusive, Parallel, Inklusive, Event_based
 }

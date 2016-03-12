@@ -21,6 +21,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  *
  * @author Philipp Kanne
  */
+
 public interface RenderingInformation extends IsSerializable
 {
     /**
@@ -72,5 +73,7 @@ public interface RenderingInformation extends IsSerializable
      * @return
      */
     double getDepth();
+
+	
 
 }

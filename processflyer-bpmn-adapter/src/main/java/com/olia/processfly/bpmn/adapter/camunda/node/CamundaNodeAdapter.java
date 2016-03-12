@@ -10,17 +10,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.olia.processflyer.shared.bpmn.template.impl.dsl.copy;
+package com.olia.processfly.bpmn.adapter.camunda.node;
 
-import com.olia.processflyer.shared.bpmn.template.Node;
-import com.olia.processflyer.shared.bpmn.template.NodeType;
+import org.camunda.bpm.model.xml.instance.ModelElementInstance;
 
 /**
- * DOCME
- *
  * @author Philipp Kanne
  */
-public interface NodeBuilder<T extends Node<? extends NodeType>>
-{
-    T node();
+public interface CamundaNodeAdapter<SOURCE extends ModelElementInstance, RESULT> {
+
+	RESULT adapt(SOURCE node);
+
+	boolean canAdapt(ModelElementInstance node);
+
 }

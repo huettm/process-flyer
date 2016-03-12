@@ -25,62 +25,59 @@ import com.olia.processflyer.shared.bpmn.template.impl.RenderingInformationImpl;
  *
  * @author Philipp Kanne
  */
-public abstract class AbstractNodeBuilder<NODE extends AbstractBaseNode<? extends NodeType>, NODE_INTERFACE extends Node<? extends NodeType>, THAT extends NodeBuilder<NODE_INTERFACE>> implements IsSerializable
-{
+public abstract class AbstractNodeBuilder<NODE extends AbstractBaseNode<? extends NodeType>, NODE_INTERFACE extends Node<? extends NodeType>, THAT extends NodeBuilder<NODE_INTERFACE>>
+		implements IsSerializable {
 
-    private NODE_INTERFACE theNode;
+	private NODE_INTERFACE theNode;
 
-    public NODE_INTERFACE node()
-    {
-        return theNode;
-    }
+	public NODE_INTERFACE node() {
+		return theNode;
+	}
 
-    public AbstractNodeBuilder()
-    {
-        theNode = createNewNode();
-    }
+	public AbstractNodeBuilder() {
+		theNode = createNewNode();
+	}
 
-    public THAT identifiedBy(String identifier)
-    {
-        theNode().setUniqueIdentifier(identifier);
-        return that();
-    }
+	public THAT identifiedBy(String identifier) {
+		theNode().setUniqueIdentifier(identifier);
+		return that();
+	}
 
-    @SuppressWarnings("unchecked")
-    private THAT that()
-    {
-        return (THAT) this;
-    }
+	@SuppressWarnings("unchecked")
+	private THAT that() {
+		return (THAT) this;
+	}
 
-    @SuppressWarnings("unchecked")
-    private NODE theNode()
-    {
-        return (NODE) theNode;
-    }
+	@SuppressWarnings("unchecked")
+	private NODE theNode() {
+		return (NODE) theNode;
+	}
 
-    public THAT connected(ConnectionBuilder connection)
-    {
-        connection.from(theNode);
-        theNode().addOutgoing(connection.getConnection());
+	public THAT connected(ConnectionBuilder connection) {
+		connection.from(theNode);
+		theNode().addOutgoing(connection.getConnection());
 
-        // Create backlink
-        Node<? extends NodeType> end = connection.getConnection().getEndNode();
-        NodeConnectorImpl incoming = ConnectionBuilder.to(theNode).from(end).getConnection();
-        ((AbstractBaseNode<? extends NodeType>) end).addIncoming(incoming);
+		// Create backlink
+		Node<? extends NodeType> end = connection.getConnection().getEndNode();
+		NodeConnectorImpl incoming = ConnectionBuilder.to(theNode).from(end).getConnection();
+		((AbstractBaseNode<? extends NodeType>) end).addIncoming(incoming);
 
-        return that();
-    }
+		return that();
+	}
 
-    public THAT render(RenderInformationBuilder rendering)
-    {
-        RenderingInformation data = rendering.getData();
+	public THAT render(RenderInformationBuilder rendering) {
+		RenderingInformation data = rendering.getData();
 
-        theNode().setRenderingData(data);
-        ((RenderingInformationImpl) data).setElement(theNode());
+		return render(data);
+	}
 
-        return that();
-    }
+	public THAT render(RenderingInformation data) {
+		theNode().setRenderingData(data);
+		((RenderingInformationImpl) data).setElement(theNode());
 
-    protected abstract NODE_INTERFACE createNewNode();
+		return that();
+	}
+
+	protected abstract NODE_INTERFACE createNewNode();
 
 }

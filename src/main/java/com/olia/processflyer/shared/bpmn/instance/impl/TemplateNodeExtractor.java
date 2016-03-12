@@ -16,6 +16,7 @@ import static com.olia.processflyer.shared.bpmn.template.impl.InOrderNodeVisitor
 
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
 import com.olia.processflyer.shared.bpmn.template.impl.NodeVisitorStrategy;
@@ -25,10 +26,11 @@ import com.olia.processflyer.shared.bpmn.template.impl.NodeVisitorStrategy;
  * 
  * @author Philipp Kanne
  */
-public class TemplateNodeExtractor
+public class TemplateNodeExtractor implements IsSerializable
 {
     private CollectAllNodesProcessTemplateVisitor visitor = new CollectAllNodesProcessTemplateVisitor();
 
+    TemplateNodeExtractor(){}
     public List<Node<?>> extractNodes(ProcessTemplate template)
     {
         NodeVisitorStrategy visitorStrategy = anInOrderVisitorStrategyFor(template.getRootNode());

@@ -14,6 +14,7 @@ package com.olia.processflyer.shared.bpmn.instance;
 
 import java.util.Set;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Identifiable;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
@@ -24,7 +25,7 @@ import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
  *
  * @author Philipp Kanne
  */
-public interface ProcessInstance extends Identifiable
+public interface ProcessInstance extends Identifiable, IsSerializable
 {
     /**
      * The process template.

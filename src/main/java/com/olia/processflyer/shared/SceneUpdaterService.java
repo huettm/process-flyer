@@ -8,5 +8,5 @@ import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceImpl;
 
 @RemoteServiceRelativePath("sceneUpdater")
 public interface SceneUpdaterService extends RemoteService {
-	Collection<ProcessInstanceImpl> getProcessInstances();
+	ProcessInstanceImpl[] getProcessInstances();
 }

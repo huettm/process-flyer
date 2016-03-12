@@ -14,12 +14,14 @@ package com.olia.processflyer.shared.bpmn.template;
 
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * DOCME
  *
  * @author Philipp Kanne
  */
-public interface ProcessTemplate
+public interface ProcessTemplate extends IsSerializable
 {
     Node<? extends NodeType> getRootNode();
 

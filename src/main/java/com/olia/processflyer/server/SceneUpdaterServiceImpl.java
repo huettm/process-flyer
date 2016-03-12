@@ -16,9 +16,9 @@ public class SceneUpdaterServiceImpl extends RemoteServiceServlet  implements Sc
 	private HackathonDungleMock mock=new HackathonDungleMock();
 	
 	@Override
-	public Collection<ProcessInstanceImpl> getProcessInstances() {
+	public ProcessInstanceImpl[] getProcessInstances() {
 		Collection<ProcessInstanceImpl> myPis= mock.createDungle(1);
-		return myPis;
+		return  myPis.toArray(new ProcessInstanceImpl[myPis.size()]);
 	}
 
 }

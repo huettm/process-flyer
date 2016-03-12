@@ -1,10 +1,11 @@
 package com.olia.processflyer.shared.bpmn.template.impl.dsl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.element.Gateway;
 import com.olia.processflyer.shared.bpmn.template.impl.GatewayImpl;
 
 public class GatewayBuilder extends AbstractNodeBuilder<GatewayImpl, Gateway, GatewayBuilder> implements
-        NodeBuilder<Gateway>
+        NodeBuilder<Gateway>, IsSerializable
 {
     private GatewayBuilder()
     {

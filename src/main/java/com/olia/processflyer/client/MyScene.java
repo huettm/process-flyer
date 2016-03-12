@@ -46,15 +46,15 @@ public class MyScene extends AnimatedScene {
     
     Collection<ProcessInstanceImpl> result = null;
 
-    private static Logger LOG = Logger.getLogger("");
+    private static Logger LOG = Logger.getLogger("Scene");
     
-    AsyncCallback<Collection<ProcessInstanceImpl>> callback = new AsyncCallback<Collection<ProcessInstanceImpl>>() {
+    AsyncCallback<ProcessInstanceImpl[]> callback = new AsyncCallback<ProcessInstanceImpl[]>() {
         public void onFailure(Throwable caught) {
         	LOG.log(Level.SEVERE,"Error: "+caught.getMessage());
         }
 
-        public void onSuccess(Collection<ProcessInstanceImpl> result) {
-        	LOG.log(Level.INFO,"Received new scene update: "+result.size()+" process instances");
+        public void onSuccess(ProcessInstanceImpl[] result) {
+        	LOG.log(Level.INFO,"Received new scene update: "+result.length+" process instances");
         }
       };
       

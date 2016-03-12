@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.element;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Node;
 
 /**
@@ -19,7 +20,7 @@ import com.olia.processflyer.shared.bpmn.template.Node;
  *
  * @author Philipp Kanne
  */
-public interface Label extends Node<LabelType>
+public interface Label extends Node<LabelType>, IsSerializable
 {
     String getText();
 }

@@ -15,6 +15,7 @@ package com.olia.processflyer.shared.bpmn.template.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Point;
 import com.olia.processflyer.shared.bpmn.template.RenderingInformation;
 import com.olia.processflyer.shared.bpmn.template.TemplateElement;
@@ -24,7 +25,7 @@ import com.olia.processflyer.shared.bpmn.template.TemplateElement;
  *
  * @author Philipp Kanne
  */
-public class RenderingInformationImpl implements RenderingInformation
+public class RenderingInformationImpl implements RenderingInformation, IsSerializable
 {
     private TemplateElement element;
 
@@ -40,6 +41,8 @@ public class RenderingInformationImpl implements RenderingInformation
 
     private double depth;
 
+    public RenderingInformationImpl(){}
+    
     @Override
     public TemplateElement getElement()
     {

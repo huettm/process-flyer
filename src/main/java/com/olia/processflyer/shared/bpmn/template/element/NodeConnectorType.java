@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.element;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
 
 /**
@@ -19,6 +20,6 @@ import com.olia.processflyer.shared.bpmn.template.NodeType;
  *
  * @author Philipp Kanne
  */
-public enum NodeConnectorType implements NodeType {
+public enum NodeConnectorType implements NodeType , IsSerializable{
     Default
 }

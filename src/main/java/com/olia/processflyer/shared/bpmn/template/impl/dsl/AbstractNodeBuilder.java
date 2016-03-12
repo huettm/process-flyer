@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl.dsl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
 import com.olia.processflyer.shared.bpmn.template.RenderingInformation;
@@ -24,7 +25,7 @@ import com.olia.processflyer.shared.bpmn.template.impl.RenderingInformationImpl;
  *
  * @author Philipp Kanne
  */
-public abstract class AbstractNodeBuilder<NODE extends AbstractBaseNode<? extends NodeType>, NODE_INTERFACE extends Node<? extends NodeType>, THAT extends NodeBuilder<NODE_INTERFACE>>
+public abstract class AbstractNodeBuilder<NODE extends AbstractBaseNode<? extends NodeType>, NODE_INTERFACE extends Node<? extends NodeType>, THAT extends NodeBuilder<NODE_INTERFACE>> implements IsSerializable
 {
 
     private NODE_INTERFACE theNode;

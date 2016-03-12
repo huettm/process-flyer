@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.NodeElementType;
 import com.olia.processflyer.shared.bpmn.template.element.Gateway;
 import com.olia.processflyer.shared.bpmn.template.element.GatewayType;
@@ -21,7 +22,7 @@ import com.olia.processflyer.shared.bpmn.template.element.GatewayType;
  *
  * @author Philipp Kanne
  */
-public class GatewayImpl extends AbstractBaseNode<GatewayType> implements Gateway
+public class GatewayImpl extends AbstractBaseNode<GatewayType> implements Gateway, IsSerializable
 {
 
     public GatewayImpl()

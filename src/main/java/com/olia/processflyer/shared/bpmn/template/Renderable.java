@@ -12,12 +12,14 @@
  */
 package com.olia.processflyer.shared.bpmn.template;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * Tag node as renderable.
  *
  * @author Philipp Kanne
  */
-public interface Renderable
+public interface Renderable extends IsSerializable
 {
     /**
      * The information for rendering.

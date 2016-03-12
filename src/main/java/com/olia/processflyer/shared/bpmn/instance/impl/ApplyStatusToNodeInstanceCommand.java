@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.instance.impl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.instance.InstanceStatus;
 import com.olia.processflyer.shared.bpmn.instance.NodeInstance;
 
@@ -20,10 +21,12 @@ import com.olia.processflyer.shared.bpmn.instance.NodeInstance;
  *
  * @author Philipp Kanne
  */
-public class ApplyStatusToNodeInstanceCommand
+public class ApplyStatusToNodeInstanceCommand implements IsSerializable
 {
     private ProcessInstanceStatusResolver statusResolver;
 
+    ApplyStatusToNodeInstanceCommand(){}
+    
     public ApplyStatusToNodeInstanceCommand(ProcessInstanceStatusResolver statusResolver)
     {
         super();

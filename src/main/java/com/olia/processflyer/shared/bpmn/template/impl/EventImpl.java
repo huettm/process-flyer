@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.NodeElementType;
 import com.olia.processflyer.shared.bpmn.template.element.Event;
 import com.olia.processflyer.shared.bpmn.template.element.EventType;
@@ -21,7 +22,7 @@ import com.olia.processflyer.shared.bpmn.template.element.EventType;
  *
  * @author Philipp Kanne
  */
-public class EventImpl extends AbstractBaseNode<EventType> implements Event
+public class EventImpl extends AbstractBaseNode<EventType> implements Event, IsSerializable
 {
 
     public EventImpl()

@@ -18,17 +18,7 @@
 
 	<servlet-mapping>
 		<servlet-name>sceneUpdaterImpl</servlet-name>
-		<url-pattern>/sceneUpdater</url-pattern>
-	</servlet-mapping>
-
-	<!-- remote logging -->
-	<servlet>
-		<servlet-name>remoteLogging</servlet-name>
-		<servlet-class>com.google.gwt.logging.server.RemoteLoggingServiceImpl</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>remoteLogging</servlet-name>
-		<url-pattern>/ProcessFlyer/remote_logging</url-pattern>
+		<url-pattern>/ProcessFlyer/sceneUpdater</url-pattern>
 	</servlet-mapping>
 
 </web-app>

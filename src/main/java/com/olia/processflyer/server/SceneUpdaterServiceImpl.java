@@ -13,9 +13,12 @@ public class SceneUpdaterServiceImpl extends RemoteServiceServlet  implements Sc
 	 */
 	private static final long serialVersionUID = -2232537390715617168L;
 
+	private HackathonDungleMock mock=new HackathonDungleMock();
+	
 	@Override
 	public Collection<ProcessInstanceImpl> getProcessInstances() {
-		return new HackathonDungleMock().createDungle(1);
+		Collection<ProcessInstanceImpl> myPis= mock.createDungle(1);
+		return myPis;
 	}
 
 }

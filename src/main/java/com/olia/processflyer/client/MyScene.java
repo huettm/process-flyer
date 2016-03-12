@@ -14,6 +14,7 @@ import com.olia.processflyer.shared.SceneUpdaterServiceAsync;
 import com.olia.processflyer.shared.bpmn.instance.HackathonProcessMock;
 import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceImpl;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +68,7 @@ public class MyScene extends AnimatedScene {
                 100, // field of view
                 getRenderer().getAbsoluteAspectRation(), // aspect ratio 
                 1, // near
-                10000 // far 
+                1000 // far 
         );
         
     	if(sceneUpdater==null) {
@@ -76,7 +77,9 @@ public class MyScene extends AnimatedScene {
     	sceneUpdater.getProcessInstances(callback);
     	
         camera.getPosition().setZ(600);
-        //this.controls = new FirstPersonControls( camera, getCanvas() );
+//        this.controls = new FirstPersonControls( camera, getCanvas() );
+//        this.controls.setMovementSpeed(1.0);
+//        this.controls.setLookSpeed(1.0);
         
         getScene().add(new AmbientLight(0x404040));
 
@@ -90,32 +93,42 @@ public class MyScene extends AnimatedScene {
         
         Map<String, List<ProcessBox>> processesMap = new HashMap<>();
         
-        if(result != null) {
-            for(ProcessInstanceImpl processInstance: result) {
-                ProcessBox process = new ProcessBox();
-                process.loadProcessDefinition(processInstance.getProcessTemplate());
-                if(processesMap.containsKey(processInstance.getProcessTemplate().getName())) {
-                    processesMap.get(processInstance.getProcessTemplate().getName()).add(process);
-                } else {
-                    List<ProcessBox> processesByName = new ArrayList<>();
-                    processesByName.add(process);
-                    processesMap.put(processInstance.getProcessTemplate().getName(), processesByName);
-                }               
-            }
-        }       
-               
+//        if(result != null) {
+//            for(ProcessInstanceImpl processInstance: result) {
+//                ProcessBox process = new ProcessBox();
+//                process.loadProcessDefinition(processInstance.getProcessTemplate());
+//                if(processesMap.containsKey(processInstance.getProcessTemplate().getName())) {
+//                    processesMap.get(processInstance.getProcessTemplate().getName()).add(process);
+//                } else {
+//                    List<ProcessBox> processesByName = new ArrayList<>();
+//                    processesByName.add(process);
+//                    processesMap.put(processInstance.getProcessTemplate().getName(), processesByName);
+//                }               
+//            }
+//        }
+        ProcessBox process = new ProcessBox();
+        process.loadProcessDefinition(HackathonProcessMock.createTemplate());
+        List<ProcessBox> p = new ArrayList<>();
+        p.add(process);
+        processesMap.put("Hackaton_Process", p);
+        ProcessBox process2 = new ProcessBox();
+        process2.loadProcessDefinition(HackathonProcessMock.createTemplate());
+        List<ProcessBox> p2 = new ArrayList<>();
+        p2.add(process2);        
+        processesMap.put("Hackaton_Process", p2);
+        
         //Processlanes starten links von der Mitte und werden nach rechts erweitert
-        int processLaneXPosition = -300;
+        int processLaneXPosition = -1200;
         for(Entry<String,List<ProcessBox>> entry: processesMap.entrySet()) {
             GWT.log("Displaying all processes for template: " + entry.getKey());            
             int depth = 0;
             for(ProcessBox processBox: entry.getValue()) {
-                GWT.log("ProcessBox");
+                GWT.log("ProcessBox at depth " + depth);
                 processBox.getPosition().add(new Vector3(processLaneXPosition, 0, depth));
                 depth = depth + processBox.getDistance();
                 for(VisualProcessObject processElement: processBox.processObjects) {
                     Mesh currentMesh = new Mesh(processElement.getGeometry(), material);
-                    currentMesh.getPosition().add(processBox.getPosition());
+                    currentMesh.setPosition(processElement.getPosition().add(processBox.getPosition()));                    
                     getScene().add(currentMesh);
                 }
             }
@@ -128,7 +141,7 @@ public class MyScene extends AnimatedScene {
     protected void onUpdate(double duration) {
         // Called when the animation should be updated.        
         getRenderer().render(getScene(), camera);
-        //this.controls.update(1000);
+//        this.controls.update(1000);
     }
 
 }

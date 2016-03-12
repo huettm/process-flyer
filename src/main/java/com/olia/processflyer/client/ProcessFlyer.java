@@ -27,7 +27,7 @@ import thothbot.parallax.core.shared.objects.Mesh;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class Parallax implements EntryPoint {
+public class ProcessFlyer implements EntryPoint {
 
     /**
      * The message displayed to the user when the server cannot be reached or

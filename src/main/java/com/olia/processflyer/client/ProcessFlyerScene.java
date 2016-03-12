@@ -16,6 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.MouseMoveEvent;
+import com.google.gwt.event.dom.client.TouchMoveEvent;
+import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.olia.processflyer.shared.SceneUpdaterService;
 import com.olia.processflyer.shared.SceneUpdaterServiceAsync;
@@ -54,7 +57,7 @@ public class ProcessFlyerScene extends AnimatedScene {
 	private ProcessInstanceImpl[] m_currentProcesses = null;
 
 	private Vector<Mesh> m_currentGeometries = new Vector<Mesh>();
-	
+
 	private static Logger LOG = Logger.getLogger("Scene");
 
 	AsyncCallback<ProcessInstanceImpl[]> callback = new AsyncCallback<ProcessInstanceImpl[]>() {
@@ -64,8 +67,8 @@ public class ProcessFlyerScene extends AnimatedScene {
 
 		public void onSuccess(ProcessInstanceImpl[] pResult) {
 			m_currentProcesses = pResult;
-			LOG.log(Level.INFO,
-					"ProcFlyer scene update: " + (m_currentProcesses != null ? m_currentProcesses.length : "null") + " process instances");
+			LOG.log(Level.INFO, "ProcFlyer scene update: "
+					+ (m_currentProcesses != null ? m_currentProcesses.length : "null") + " process instances");
 		}
 	};
 
@@ -73,10 +76,14 @@ public class ProcessFlyerScene extends AnimatedScene {
 
 	private Mesh m_meshLinesSmall;
 	private Mesh m_meshLinesBounding;
-	
+
 	private MeshLambertMaterial m_defaultMaterial;
 
 	private MeshBasicMaterial m_materialLines;
+
+	public int mouseX;
+
+	public int mouseY;
 
 	@Override
 	protected void onStart() {
@@ -113,17 +120,17 @@ public class ProcessFlyerScene extends AnimatedScene {
 
 		m_meshLinesSmall = new Mesh(geometryLines, m_materialLines);
 		getScene().add(m_meshLinesSmall);
-		
-		BoxGeometry a_boundingBox = new BoxGeometry(2*K_GRID_SZ, 2*K_GRID_SZ, K_GRID_SZ);
-		m_meshLinesBounding=new Mesh(a_boundingBox, m_materialLines);
+
+		BoxGeometry a_boundingBox = new BoxGeometry(2 * K_GRID_SZ, 2 * K_GRID_SZ, K_GRID_SZ);
+		m_meshLinesBounding = new Mesh(a_boundingBox, m_materialLines);
 		getScene().add(m_meshLinesBounding);
 	}
 
 	private void processSceneUpdate() {
-		if(m_currentProcesses==null) {
+		if (m_currentProcesses == null) {
 			return;
 		}
-		LOG.log(Level.FINE,"ProcFlyer processing " );
+		LOG.log(Level.FINE, "ProcFlyer processing ");
 		Map<String, List<ProcessBox>> processesMap = new HashMap<>();
 		for (ProcessInstanceImpl myProcInstance : m_currentProcesses) {
 			ProcessBox process = new ProcessBox();
@@ -140,8 +147,8 @@ public class ProcessFlyerScene extends AnimatedScene {
 		// erweitert
 		m_currentGeometries.clear();
 		int processLaneXPosition = -1200;
-		Vector3 myMin=new Vector3();
-		Vector3 myMax=new Vector3();
+		Vector3 myMin = new Vector3();
+		Vector3 myMax = new Vector3();
 		for (Entry<String, List<ProcessBox>> entry : processesMap.entrySet()) {
 			GWT.log("Displaying all processes for template: " + entry.getKey());
 			int depth = 1000;
@@ -150,26 +157,29 @@ public class ProcessFlyerScene extends AnimatedScene {
 				processBox.getPosition().add(new Vector3(processLaneXPosition, 0, depth));
 				depth = depth + 100;
 				for (VisualProcessObject processElement : processBox.processObjects) {
-					Mesh myNewMesh = new Mesh(processElement.getGeometry(), m_defaultMaterial);
+					Mesh myNewMesh = new Mesh(processElement.getGeometry(), m_materialLines);
 					myNewMesh.setPosition(processElement.getPosition().add(processBox.getPosition()));
-					Vector3 myPos=myNewMesh.getPosition();
+					Vector3 myPos = myNewMesh.getPosition();
 					myMin.min(myPos);
 					myMax.max(myPos);
-					LOG.log(Level.FINER,"ProcFlyer pos " + myPos);
-					getScene().add(myNewMesh);
+					LOG.log(Level.FINER, "ProcFlyer pos " + myPos);
 					m_currentGeometries.add(myNewMesh);
 				}
 			}
 			processLaneXPosition = processLaneXPosition + 200;
 		}
 		getScene().remove(m_meshLinesBounding);
-		Vector3 mySz=myMax.sub(myMin);
-		LOG.log(Level.FINE, "ProcFlyer bounding box "+mySz);
-		BoxGeometry a_boundingBox = new BoxGeometry(mySz.getX(),mySz.getY(),mySz.getZ());
-		m_meshLinesBounding=new Mesh(a_boundingBox, m_materialLines);
+		Vector3 mySz = myMax.sub(myMin);
+		LOG.log(Level.FINE, "ProcFlyer bounding box " + mySz);
+		BoxGeometry a_boundingBox = new BoxGeometry(mySz.getX(), mySz.getY(), mySz.getZ());
+		m_meshLinesBounding = new Mesh(a_boundingBox, m_materialLines);
 		getScene().add(m_meshLinesBounding);
+		Vector3 myKorV = mySz.divide(2.0d);
+		for (Mesh myMesh : m_currentGeometries) {
+			myMesh.setPosition(myMesh.getPosition().sub(myKorV));
+		}
 		LOG.log(Level.INFO, "ProcFlyer Consume scene");
-		m_currentProcesses=null;
+		m_currentProcesses = null;
 	}
 
 	private List<List<Vector3>> setupAttributes(Geometry geometry) {
@@ -186,9 +196,19 @@ public class ProcessFlyerScene extends AnimatedScene {
 	@Override
 	protected void onUpdate(double duration) {
 		processSceneUpdate();
+		camera.getPosition().addX((-mouseX - camera.getPosition().getX()) * 0.05);
+		camera.getPosition().addY((mouseY - camera.getPosition().getY()) * 0.05);
+		camera.lookAt(getScene().getPosition());
+
 		// Called when the animation should be updated.
 		getRenderer().render(getScene(), camera);
 		// this.controls.update(1000);
+	}
+
+	public void onMouseMove(MouseMoveEvent arg0) {
+			mouseX = arg0.getClientX();
+			mouseY = arg0.getClientY();
+			LOG.log(Level.FINEST,"ProcFlyer mouseX="+mouseX+" mouseY="+mouseY);
 	}
 
 }

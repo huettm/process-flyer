@@ -6,6 +6,8 @@
 package com.olia.processflyer.client;
 
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -41,14 +43,16 @@ public class MyScene extends AnimatedScene {
     FirstPersonControls controls;
     
     private SceneUpdaterServiceAsync sceneUpdater;
-
+    
+    private Logger logger = Logger.getLogger("ProcessFlyerScene");
+    
     AsyncCallback<Collection<ProcessInstanceImpl>> callback = new AsyncCallback<Collection<ProcessInstanceImpl>>() {
         public void onFailure(Throwable caught) {
-          GWT.log("Error: "+caught.getMessage());
+        	logger.log(Level.ALL, "Error: "+caught.getMessage());
         }
 
         public void onSuccess(Collection<ProcessInstanceImpl> result) {
-          GWT.log("Received new scene update: "+result.size()+" process instances");
+        	logger.log(Level.ALL,"Received new scene update: "+result.size()+" process instances");
         }
       };
       
@@ -59,6 +63,13 @@ public class MyScene extends AnimatedScene {
     		sceneUpdater=GWT.create(SceneUpdaterService.class);
     	}
     	sceneUpdater.getProcessInstances(callback);
+        // Loads default camera for the Animation
+        camera = new PerspectiveCamera(
+                100, // field of view
+                getRenderer().getAbsoluteAspectRation(), // aspect ratio 
+                1, // near
+                1000 // far 
+        );
     	
         camera.getPosition().setZ(600);
         //this.controls = new FirstPersonControls( camera, getCanvas() );

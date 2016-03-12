@@ -9,6 +9,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * @author philipp
  *
  */
+
 public class Point implements IsSerializable{
 
 	private double x;
@@ -16,8 +17,11 @@ public class Point implements IsSerializable{
 	private double z;
 
 	public Point() {
-		x=0;y=0;z=0;
+		x = 0;
+		y = 0;
+		z = 0;
 	}
+
 	public Point(double x, double y, double z) {
 		super();
 		this.x = x;
@@ -44,6 +48,22 @@ public class Point implements IsSerializable{
 
 	public Point add(Point other) {
 		return new Point(x + other.getX(), y + other.getY(), z + other.z);
+	}
+
+	public Point addX(double x) {
+		return add(new Point(x, 0, 0));
+	}
+
+	public Point addY(double y) {
+		return add(new Point(0, y, 0));
+	}
+
+	public Point addZ(double z) {
+		return add(new Point(0, 0, z));
+	}
+
+	public Point createCopy() {
+		return new Point(x, y, z);
 	}
 
 	@Override
@@ -77,7 +97,10 @@ public class Point implements IsSerializable{
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Point [x=" + x + ", y=" + y + ", z=" + z + "]";
+	}
 
 }

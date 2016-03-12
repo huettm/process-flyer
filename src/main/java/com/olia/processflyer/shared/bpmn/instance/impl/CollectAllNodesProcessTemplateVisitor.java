@@ -34,7 +34,7 @@ public class CollectAllNodesProcessTemplateVisitor implements NodeVisitor, IsSer
     @Override
     public void visit(TemplateElement theElement)
     {
-        if (theElement.isNode())
+        if (theElement.isNode() && !allNodes.contains(theElement))
         {
             allNodes.add((Node<?>) theElement);
         }

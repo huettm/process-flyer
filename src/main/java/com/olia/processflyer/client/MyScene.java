@@ -57,6 +57,13 @@ public class MyScene extends AnimatedScene {
     @Override
     protected void onStart() {
 
+        camera = new PerspectiveCamera(
+                100, // field of view
+                getRenderer().getAbsoluteAspectRation(), // aspect ratio 
+                1, // near
+                10000 // far 
+        );
+        
     	if(sceneUpdater==null) {
     		sceneUpdater=GWT.create(SceneUpdaterService.class);
     	}
@@ -83,6 +90,7 @@ public class MyScene extends AnimatedScene {
             Mesh currentMesh = new Mesh(obj.getGeometry(), material);
             currentMesh.setPosition(obj.getPosition().add(process.getPosition()));
             getScene().add(currentMesh);
+            GWT.log("added Mesh");
         }
     }
 

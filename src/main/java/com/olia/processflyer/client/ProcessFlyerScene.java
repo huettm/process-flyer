@@ -7,7 +7,11 @@ package com.olia.processflyer.client;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,8 +50,10 @@ public class ProcessFlyerScene extends AnimatedScene {
 
 	private SceneUpdaterServiceAsync sceneUpdater;
 
-	private ProcessInstanceImpl[] result = null;
+	private ProcessInstanceImpl[] m_currentProcesses = null;
 
+	private Vector<Mesh> m_currentGeometries = new Vector<Mesh>();
+	
 	private static Logger LOG = Logger.getLogger("Scene");
 
 	AsyncCallback<ProcessInstanceImpl[]> callback = new AsyncCallback<ProcessInstanceImpl[]>() {
@@ -56,15 +62,15 @@ public class ProcessFlyerScene extends AnimatedScene {
 		}
 
 		public void onSuccess(ProcessInstanceImpl[] pResult) {
-			result = pResult;
+			m_currentProcesses = pResult;
 			LOG.log(Level.INFO,
-					"ProcessBox scene update: " + (result != null ? result.length : "null") + " process instances");
+					"ProcFlyer scene update: " + (m_currentProcesses != null ? m_currentProcesses.length : "null") + " process instances");
 		}
 	};
 
 	Mesh meshLines;
-	Mesh meshTris;
-	Mesh meshMixed;
+
+	private MeshLambertMaterial m_defaultMaterial;
 
 	@Override
 	protected void onStart() {
@@ -79,6 +85,7 @@ public class ProcessFlyerScene extends AnimatedScene {
 		if (sceneUpdater == null) {
 			sceneUpdater = GWT.create(SceneUpdaterService.class);
 		}
+		LOG.log(Level.FINE, "ProcFlyer calling service updater");
 		sceneUpdater.getProcessInstances(callback);
 
 		camera.getPosition().setZ(800);
@@ -93,9 +100,9 @@ public class ProcessFlyerScene extends AnimatedScene {
 		light.getPosition().set(0, 1, 0);
 		getScene().add(light);
 
-		MeshLambertMaterial material = new MeshLambertMaterial();
-		material.setAmbient(new Color(0xbbbbbb));
-		material.setSide(Material.SIDE.DOUBLE);
+		m_defaultMaterial = new MeshLambertMaterial();
+		m_defaultMaterial.setAmbient(new Color(0xbbbbbb));
+		m_defaultMaterial.setSide(Material.SIDE.DOUBLE);
 
 		MeshBasicMaterial materialLines = new MeshBasicMaterial();
 		materialLines.setWireframe(true);
@@ -103,12 +110,48 @@ public class ProcessFlyerScene extends AnimatedScene {
 		meshLines = new Mesh(geometryLines, materialLines);
 		getScene().add(meshLines);
 
-		processSceneUpdate(result);
 	}
 
-	private void processSceneUpdate(ProcessInstanceImpl[] result2) {
-		// TODO Auto-generated method stub
-		
+	private void processSceneUpdate() {
+		if(m_currentProcesses==null) {
+			return;
+		}
+		LOG.log(Level.FINE,"ProcFlyer processing " );
+		Map<String, List<ProcessBox>> processesMap = new HashMap<>();
+		for (ProcessInstanceImpl myProcInstance : m_currentProcesses) {
+			ProcessBox process = new ProcessBox();
+			process.loadProcessDefinition(myProcInstance.getProcessTemplate());
+			if (processesMap.containsKey(myProcInstance.getProcessTemplate().getName())) {
+				processesMap.get(myProcInstance.getProcessTemplate().getName()).add(process);
+			} else {
+				List<ProcessBox> processesByName = new ArrayList<>();
+				processesByName.add(process);
+				processesMap.put(myProcInstance.getProcessTemplate().getName(), processesByName);
+			}
+		}
+		// Processlanes starten links von der Mitte und werden nach rechts
+		// erweitert
+		m_currentGeometries.clear();
+		int processLaneXPosition = -1200;
+		for (Entry<String, List<ProcessBox>> entry : processesMap.entrySet()) {
+			GWT.log("Displaying all processes for template: " + entry.getKey());
+			int depth = 1000;
+			for (ProcessBox processBox : entry.getValue()) {
+				GWT.log("ProcFlyer at depth " + depth);
+				processBox.getPosition().add(new Vector3(processLaneXPosition, 0, depth));
+				depth = depth + 100;
+				for (VisualProcessObject processElement : processBox.processObjects) {
+					Mesh myNewMesh = new Mesh(processElement.getGeometry(), m_defaultMaterial);
+					myNewMesh.setPosition(processElement.getPosition().add(processBox.getPosition()));
+					LOG.log(Level.FINER,"ProcFlyer pos " + myNewMesh.getPosition());
+//					getScene().add(currentMesh);
+					m_currentGeometries.add(myNewMesh);
+				}
+			}
+			processLaneXPosition = processLaneXPosition + 200;
+		}
+		LOG.log(Level.INFO, "ProcFlyer Consume scene");
+		m_currentProcesses=null;
 	}
 
 	private List<List<Vector3>> setupAttributes(Geometry geometry) {
@@ -124,6 +167,7 @@ public class ProcessFlyerScene extends AnimatedScene {
 
 	@Override
 	protected void onUpdate(double duration) {
+		processSceneUpdate();
 		// Called when the animation should be updated.
 		getRenderer().render(getScene(), camera);
 		// this.controls.update(1000);

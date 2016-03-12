@@ -61,8 +61,8 @@ public class MyScene extends AnimatedScene {
 		}
 
 		public void onSuccess(ProcessInstanceImpl[] pResult) {
-			LOG.log(Level.INFO, "Received new scene update: " + result.length + " process instances");
 			result = pResult;
+			LOG.log(Level.INFO, "Received new scene update: " +( result!=null ?result.length:"null") + " process instances");
 		}
 	};
 
@@ -112,6 +112,8 @@ public class MyScene extends AnimatedScene {
 		// }
 		// }
 		// }
+		LOG.log(Level.INFO,"--> Hackaton");
+
 		ProcessBox process = new ProcessBox();
 		process.loadProcessDefinition(HackathonProcessMock.createTemplate());
 		List<ProcessBox> p = new ArrayList<>();

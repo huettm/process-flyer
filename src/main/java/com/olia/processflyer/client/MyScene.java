@@ -13,6 +13,11 @@ import com.olia.processflyer.shared.SceneUpdaterService;
 import com.olia.processflyer.shared.SceneUpdaterServiceAsync;
 import com.olia.processflyer.shared.bpmn.instance.HackathonProcessMock;
 import com.olia.processflyer.shared.bpmn.instance.impl.ProcessInstanceImpl;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import thothbot.parallax.core.client.AnimatedScene;
 import thothbot.parallax.core.client.controls.FirstPersonControls;
@@ -23,6 +28,7 @@ import thothbot.parallax.core.shared.lights.DirectionalLight;
 import thothbot.parallax.core.shared.materials.Material;
 import thothbot.parallax.core.shared.materials.MeshLambertMaterial;
 import thothbot.parallax.core.shared.math.Color;
+import thothbot.parallax.core.shared.math.Vector3;
 import thothbot.parallax.core.shared.objects.Mesh;
 /**
  *
@@ -82,23 +88,47 @@ public class MyScene extends AnimatedScene {
         material.setAmbient( new Color(0xbbbbbb) );
         material.setSide(Material.SIDE.DOUBLE);
         
-        ProcessBox process = new ProcessBox();
+        Map<String, List<ProcessBox>> processesMap = new HashMap<>();
         
-        process.loadProcessDefinition(HackathonProcessMock.createTemplate());
+        if(result != null) {
+            for(ProcessInstanceImpl processInstance: result) {
+                ProcessBox process = new ProcessBox();
+                process.loadProcessDefinition(processInstance.getProcessTemplate());
+                if(processesMap.containsKey(processInstance.getProcessTemplate().getName())) {
+                    processesMap.get(processInstance.getProcessTemplate().getName()).add(process);
+                } else {
+                    List<ProcessBox> processesByName = new ArrayList<>();
+                    processesByName.add(process);
+                    processesMap.put(processInstance.getProcessTemplate().getName(), processesByName);
+                }               
+            }
+        }       
                
-        for(VisualProcessObject obj: process.processObjects) {
-            Mesh currentMesh = new Mesh(obj.getGeometry(), material);
-            currentMesh.setPosition(obj.getPosition().add(process.getPosition()));
-            getScene().add(currentMesh);
-            GWT.log("added Mesh");
+        //Processlanes starten links von der Mitte und werden nach rechts erweitert
+        int processLaneXPosition = -300;
+        for(Entry<String,List<ProcessBox>> entry: processesMap.entrySet()) {
+            GWT.log("Displaying all processes for template: " + entry.getKey());            
+            int depth = 0;
+            for(ProcessBox processBox: entry.getValue()) {
+                GWT.log("ProcessBox");
+                processBox.getPosition().add(new Vector3(processLaneXPosition, 0, depth));
+                depth = depth + processBox.getDistance();
+                for(VisualProcessObject processElement: processBox.processObjects) {
+                    Mesh currentMesh = new Mesh(processElement.getGeometry(), material);
+                    currentMesh.getPosition().add(processBox.getPosition());
+                    getScene().add(currentMesh);
+                }
+            }
+            processLaneXPosition = processLaneXPosition + 100;
         }
+        
     }
 
     @Override
     protected void onUpdate(double duration) {
         // Called when the animation should be updated.        
         getRenderer().render(getScene(), camera);
-        //this.controls.update(1);
+        //this.controls.update(1000);
     }
 
 }

@@ -18,8 +18,6 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<gaeVersion>1.9.3</gaeVersion>
-		<datanucleusVersion>1.1.5</datanucleusVersion>
 		<slf4jVersion>1.5.11</slf4jVersion>
 		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
 	</properties>
@@ -40,16 +38,19 @@
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-servlet</artifactId>
+			<version>${gwtVersion}</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
+			<version>${gwtVersion}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-dev</artifactId>
+			<version>${gwtVersion}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -76,86 +77,6 @@
 			<artifactId>parallax</artifactId>
 			<version>1.6</version>
 		</dependency>
-		<dependency>
-			<!-- this library provides the core appengine features -->
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-1.0-sdk</artifactId>
-			<version>${gaeVersion}</version>
-		</dependency>
-		<dependency>
-			<!-- this library provides experimental appengine features -->
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-labs</artifactId>
-			<version>${gaeVersion}</version>
-		</dependency>
-		<dependency>
-			<!-- required for app engine based unit tests -->
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-testing</artifactId>
-			<version>${gaeVersion}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<!-- required for app engine based unit tests -->
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-api-stubs</artifactId>
-			<version>${gaeVersion}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<!-- required for app engine based unit tests -->
-			<groupId>com.google.appengine</groupId>
-			<artifactId>appengine-tools-sdk</artifactId>
-			<version>${gaeVersion}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<!-- Google App Engine supports both JPA1 and JPA2. JPA1: datanucleus 
-				appengine plugin v1 (1.0.10) + datanucleus v1 (1.1.5) JPA2: datanucleus appengine 
-				plugin v2 (2.1.1) + datanucleus v3 (3.1.1) -->
-			<groupId>com.google.appengine.orm</groupId>
-			<artifactId>datanucleus-appengine</artifactId>
-			<version>1.0.10</version>
-		</dependency>
-		<dependency>
-			<!-- datanucleus-core is not needed for compilation. in fact, it cannot 
-				have compile scope because the datanucleus plugin automatically adds it during 
-				enhancement and complains if there are two copies. app should not depend 
-				on any classes in this lib anyways. -->
-			<groupId>org.datanucleus</groupId>
-			<artifactId>datanucleus-core</artifactId>
-			<version>${datanucleusVersion}</version>
-			<scope>runtime</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.transaction</groupId>
-					<artifactId>transaction-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<!-- datanucleus-jpa is needed during compilation for its @Extension annotation 
-				which is used throughout entity classes -->
-			<groupId>org.datanucleus</groupId>
-			<artifactId>datanucleus-jpa</artifactId>
-			<version>${datanucleusVersion}</version>
-		</dependency>
-		<dependency>
-			<!-- normally this library is only needed when using JDO however datanucleus 
-				throws some JDO exceptions even when using JPA. there are several places 
-				in our code that explicitly catch these JDO exceptions therefore it is needed 
-				during compilation -->
-			<groupId>javax.jdo</groupId>
-			<artifactId>jdo2-api</artifactId>
-			<version>2.3-eb</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.transaction</groupId>
-					<artifactId>transaction-api</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- End Google App Engine libraries -->
 	</dependencies>
 
 	<build>
@@ -169,7 +90,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
-				<version>2.8.0-beta1</version>
+				<version>${gwtVersion}</version>
 				<executions>
 					<execution>
 						<goals>
@@ -187,6 +108,21 @@
 						<module>com.olia.processflyer.ProcessFlyer</module>
 					</modules>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
+				<version>1.9.32</version>
+				<configuration>
+					<enableJarClasses>false</enableJarClasses>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>endpoints_get_discovery_doc</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

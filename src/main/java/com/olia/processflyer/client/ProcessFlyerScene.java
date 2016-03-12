@@ -34,6 +34,7 @@ import thothbot.parallax.core.shared.lights.DirectionalLight;
 import thothbot.parallax.core.shared.materials.Material;
 import thothbot.parallax.core.shared.materials.MeshBasicMaterial;
 import thothbot.parallax.core.shared.materials.MeshLambertMaterial;
+import thothbot.parallax.core.shared.math.Box3;
 import thothbot.parallax.core.shared.math.Color;
 import thothbot.parallax.core.shared.math.Vector3;
 import thothbot.parallax.core.shared.objects.Mesh;
@@ -68,9 +69,14 @@ public class ProcessFlyerScene extends AnimatedScene {
 		}
 	};
 
-	Mesh meshLines;
+	public static double K_GRID_SZ = 100;
 
+	private Mesh m_meshLinesSmall;
+	private Mesh m_meshLinesBounding;
+	
 	private MeshLambertMaterial m_defaultMaterial;
+
+	private MeshBasicMaterial m_materialLines;
 
 	@Override
 	protected void onStart() {
@@ -90,9 +96,7 @@ public class ProcessFlyerScene extends AnimatedScene {
 
 		camera.getPosition().setZ(800);
 
-		double size = 150;
-
-		BoxGeometry geometryLines = new BoxGeometry(size, size, size);
+		BoxGeometry geometryLines = new BoxGeometry(K_GRID_SZ, K_GRID_SZ, K_GRID_SZ);
 
 		getScene().add(new AmbientLight(0x404040));
 
@@ -104,12 +108,15 @@ public class ProcessFlyerScene extends AnimatedScene {
 		m_defaultMaterial.setAmbient(new Color(0xbbbbbb));
 		m_defaultMaterial.setSide(Material.SIDE.DOUBLE);
 
-		MeshBasicMaterial materialLines = new MeshBasicMaterial();
-		materialLines.setWireframe(true);
+		m_materialLines = new MeshBasicMaterial();
+		m_materialLines.setWireframe(true);
 
-		meshLines = new Mesh(geometryLines, materialLines);
-		getScene().add(meshLines);
-
+		m_meshLinesSmall = new Mesh(geometryLines, m_materialLines);
+		getScene().add(m_meshLinesSmall);
+		
+		BoxGeometry a_boundingBox = new BoxGeometry(2*K_GRID_SZ, 2*K_GRID_SZ, K_GRID_SZ);
+		m_meshLinesBounding=new Mesh(a_boundingBox, m_materialLines);
+		getScene().add(m_meshLinesBounding);
 	}
 
 	private void processSceneUpdate() {
@@ -133,6 +140,8 @@ public class ProcessFlyerScene extends AnimatedScene {
 		// erweitert
 		m_currentGeometries.clear();
 		int processLaneXPosition = -1200;
+		Vector3 myMin=new Vector3();
+		Vector3 myMax=new Vector3();
 		for (Entry<String, List<ProcessBox>> entry : processesMap.entrySet()) {
 			GWT.log("Displaying all processes for template: " + entry.getKey());
 			int depth = 1000;
@@ -143,13 +152,22 @@ public class ProcessFlyerScene extends AnimatedScene {
 				for (VisualProcessObject processElement : processBox.processObjects) {
 					Mesh myNewMesh = new Mesh(processElement.getGeometry(), m_defaultMaterial);
 					myNewMesh.setPosition(processElement.getPosition().add(processBox.getPosition()));
-					LOG.log(Level.FINER,"ProcFlyer pos " + myNewMesh.getPosition());
-//					getScene().add(currentMesh);
+					Vector3 myPos=myNewMesh.getPosition();
+					myMin.min(myPos);
+					myMax.max(myPos);
+					LOG.log(Level.FINER,"ProcFlyer pos " + myPos);
+					getScene().add(myNewMesh);
 					m_currentGeometries.add(myNewMesh);
 				}
 			}
 			processLaneXPosition = processLaneXPosition + 200;
 		}
+		getScene().remove(m_meshLinesBounding);
+		Vector3 mySz=myMax.sub(myMin);
+		LOG.log(Level.FINE, "ProcFlyer bounding box "+mySz);
+		BoxGeometry a_boundingBox = new BoxGeometry(mySz.getX(),mySz.getY(),mySz.getZ());
+		m_meshLinesBounding=new Mesh(a_boundingBox, m_materialLines);
+		getScene().add(m_meshLinesBounding);
 		LOG.log(Level.INFO, "ProcFlyer Consume scene");
 		m_currentProcesses=null;
 	}

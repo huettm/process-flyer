@@ -23,7 +23,6 @@ import com.olia.processflyer.shared.bpmn.instance.ProcessInstance;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
 import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
-import com.olia.processflyer.shared.bpmn.template.impl.InOrderNodeVisitorStrategy;
 
 /**
  * DOCME

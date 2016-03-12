@@ -6,6 +6,8 @@
 package com.olia.processflyer.client;
 
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -44,13 +46,15 @@ public class MyScene extends AnimatedScene {
     
     Collection<ProcessInstanceImpl> result = null;
 
+    private static Logger LOG = Logger.getLogger("");
+    
     AsyncCallback<Collection<ProcessInstanceImpl>> callback = new AsyncCallback<Collection<ProcessInstanceImpl>>() {
         public void onFailure(Throwable caught) {
-          GWT.log("Error: "+caught.getMessage());
+        	LOG.log(Level.SEVERE,"Error: "+caught.getMessage());
         }
 
         public void onSuccess(Collection<ProcessInstanceImpl> result) {
-          GWT.log("Received new scene update: "+result.size()+" process instances");
+        	LOG.log(Level.INFO,"Received new scene update: "+result.size()+" process instances");
         }
       };
       

@@ -62,7 +62,8 @@ public class MyScene extends AnimatedScene {
 
 		public void onSuccess(ProcessInstanceImpl[] pResult) {
 			result = pResult;
-			LOG.log(Level.INFO, "Received new scene update: " +( result!=null ?result.length:"null") + " process instances");
+			LOG.log(Level.INFO,
+					"ProcessBox scene update: " + (result != null ? result.length : "null") + " process instances");
 		}
 	};
 
@@ -81,9 +82,9 @@ public class MyScene extends AnimatedScene {
 		sceneUpdater.getProcessInstances(callback);
 
 		camera.getPosition().setZ(600);
-		// this.controls = new FirstPersonControls( camera, getCanvas() );
-		// this.controls.setMovementSpeed(1.0);
-		// this.controls.setLookSpeed(1.0);
+		this.controls = new FirstPersonControls(camera, getCanvas());
+		this.controls.setMovementSpeed(1.0);
+		this.controls.setLookSpeed(1.0);
 
 		getScene().add(new AmbientLight(0x404040));
 
@@ -112,7 +113,6 @@ public class MyScene extends AnimatedScene {
 		// }
 		// }
 		// }
-		LOG.log(Level.INFO,"--> Hackaton");
 
 		ProcessBox process = new ProcessBox();
 		process.loadProcessDefinition(HackathonProcessMock.createTemplate());
@@ -121,25 +121,26 @@ public class MyScene extends AnimatedScene {
 		processesMap.put("Hackaton_Process", p);
 		ProcessBox process2 = new ProcessBox();
 		process2.loadProcessDefinition(HackathonProcessMock.createTemplate());
-        processesMap.get("Hackaton_Process").add(process2);
+		processesMap.get("Hackaton_Process").add(process2);
 
 		// Processlanes starten links von der Mitte und werden nach rechts
 		// erweitert
 		int processLaneXPosition = -1200;
 		for (Entry<String, List<ProcessBox>> entry : processesMap.entrySet()) {
 			GWT.log("Displaying all processes for template: " + entry.getKey());
-            int depth = 1000;
+			int depth = 1000;
 			for (ProcessBox processBox : entry.getValue()) {
 				GWT.log("ProcessBox at depth " + depth);
 				processBox.getPosition().add(new Vector3(processLaneXPosition, 0, depth));
-                depth = depth + 100;
+				depth = depth + 100;
 				for (VisualProcessObject processElement : processBox.processObjects) {
 					Mesh currentMesh = new Mesh(processElement.getGeometry(), material);
 					currentMesh.setPosition(processElement.getPosition().add(processBox.getPosition()));
+					LOG.log(Level.FINER,"ProcessBox pos " + currentMesh.getPosition());
 					getScene().add(currentMesh);
 				}
 			}
-            processLaneXPosition = processLaneXPosition + 200;
+			processLaneXPosition = processLaneXPosition + 200;
 		}
 
 	}
@@ -148,7 +149,7 @@ public class MyScene extends AnimatedScene {
 	protected void onUpdate(double duration) {
 		// Called when the animation should be updated.
 		getRenderer().render(getScene(), camera);
-		// this.controls.update(1000);
+		this.controls.update(1000);
 	}
 
 }

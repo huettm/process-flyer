@@ -114,7 +114,7 @@ public class MyScene extends AnimatedScene {
         ProcessBox process2 = new ProcessBox();
         process2.loadProcessDefinition(HackathonProcessMock.createTemplate());
         processesMap.get("Hackaton_Process").add(process2);
-        GWT.log("Heloo");
+        
         //Processlanes starten links von der Mitte und werden nach rechts erweitert
         int processLaneXPosition = -1200;
         for(Entry<String,List<ProcessBox>> entry: processesMap.entrySet()) {

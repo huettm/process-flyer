@@ -14,6 +14,7 @@ package com.olia.processflyer.shared.bpmn.template;
 
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.element.NodeConnector;
 
 /**
@@ -22,7 +23,7 @@ import com.olia.processflyer.shared.bpmn.template.element.NodeConnector;
  * @author Philipp Kanne
  */
 public interface Node<NODE_TYPE extends NodeType> extends Identifiable, Markable, Renderable, TemplateElement,
-        Visitable
+        Visitable, IsSerializable
 {
     /**
      * All incoming connections.

@@ -14,6 +14,9 @@ package com.olia.processflyer.shared.bpmn.template.impl.dsl;
 
 import javafx.geometry.Point3D;
 
+import java.util.List;
+
+import com.olia.processflyer.shared.bpmn.template.Point;
 import com.olia.processflyer.shared.bpmn.template.RenderingInformation;
 import com.olia.processflyer.shared.bpmn.template.impl.RenderingInformationImpl;
 
@@ -22,84 +25,79 @@ import com.olia.processflyer.shared.bpmn.template.impl.RenderingInformationImpl;
  *
  * @author Philipp Kanne
  */
-public class RenderInformationBuilder
-{
-    private RenderingInformationImpl data;
+public class RenderInformationBuilder {
+	private RenderingInformationImpl data;
 
-    private RenderInformationBuilder()
-    {
-        data = new RenderingInformationImpl();
-    }
+	private RenderInformationBuilder() {
+		data = new RenderingInformationImpl();
+	}
 
-    public static RenderInformationBuilder Render()
-    {
-        return new RenderInformationBuilder();
-    }
+	public static RenderInformationBuilder Render() {
+		return new RenderInformationBuilder();
+	}
 
-    public RenderInformationBuilder addWayPoint(double x, double y, double z)
-    {
-        data.getWayPoints().add(new Point3D(x, y, z));
-        return this;
-    }
+	public RenderInformationBuilder addWayPoint(double x, double y, double z) {
+		data.getWayPoints().add(new Point3D(x, y, z));
+		return this;
+	}
 
-    public RenderInformationBuilder startPosition(double x, double y, double z)
-    {
-        data.setStartPosition(new Point3D(x, y, z));
-        return this;
-    }
+	public RenderInformationBuilder startPosition(double x, double y, double z) {
+		data.setStartPosition(new Point3D(x, y, z));
+		return this;
+	}
 
-    public RenderInformationBuilder endPosition(double x, double y, double z)
-    {
-        data.setEndPosition(new Point3D(x, y, z));
+	public RenderInformationBuilder endPosition(double x, double y, double z) {
+		data.setEndPosition(new Point3D(x, y, z));
 
-        Point3D subtracted = data.getEndPosition().subtract(data.getStartPosition());
+		Point3D subtracted = data.getEndPosition().subtract(data.getStartPosition());
 
-        data.setWidth(subtracted.getX());
-        data.setHeight(subtracted.getY());
-        data.setDepth(subtracted.getZ());
+		data.setWidth(subtracted.getX());
+		data.setHeight(subtracted.getY());
+		data.setDepth(subtracted.getZ());
 
-        return this;
-    }
+		return this;
+	}
 
-    public RenderInformationBuilder width(double width)
-    {
-        data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point3D(width, 0, 0)));
-        data.setWidth(width);
+	public RenderInformationBuilder width(double width) {
+		data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point3D(width, 0, 0)));
+		data.setWidth(width);
 
-        return this;
-    }
+		return this;
+	}
 
-    public RenderInformationBuilder height(double height)
-    {
-        data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point3D(0, height, 0)));
-        data.setHeight(height);
+	public RenderInformationBuilder height(double height) {
+		data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point3D(0, height, 0)));
+		data.setHeight(height);
 
-        return this;
-    }
+		return this;
+	}
 
-    public RenderInformationBuilder depth(double depth)
-    {
-        data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point3D(0, 0, depth)));
-        data.setDepth(depth);
+	public RenderInformationBuilder depth(double depth) {
+		data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point3D(0, 0, depth)));
+		data.setDepth(depth);
 
-        return this;
-    }
+		return this;
+	}
 
-    private Point3D getEndPositionOrCreateFromStartPosition()
-    {
-        Point3D endPosition = data.getEndPosition();
-        if (endPosition == null)
-        {
-            Point3D start = data.getStartPosition();
-            data.setEndPosition(new Point3D(start.getX(), start.getY(), start.getZ()));
-            endPosition = data.getEndPosition();
-        }
-        return endPosition;
-    }
+	private Point3D getEndPositionOrCreateFromStartPosition() {
+		Point3D endPosition = data.getEndPosition();
+		if (endPosition == null) {
+			Point3D start = data.getStartPosition();
+			data.setEndPosition(new Point3D(start.getX(), start.getY(), start.getZ()));
+			endPosition = data.getEndPosition();
+		}
+		return endPosition;
+	}
 
-    public RenderingInformation getData()
-    {
-        return data;
-    }
+	public RenderingInformation getData() {
+		List<Point> wayPoints = data.getWayPoints();
+		if (data.getStartPosition() == null && //
+				data.getEndPosition() == null && !wayPoints.isEmpty()) {
+			data.setStartPosition(wayPoints.get(0));
+			data.setEndPosition(wayPoints.get(wayPoints.size() - 1));
+		}
+
+		return data;
+	}
 
 }

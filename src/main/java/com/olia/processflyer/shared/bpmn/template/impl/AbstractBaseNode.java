@@ -15,6 +15,7 @@ package com.olia.processflyer.shared.bpmn.template.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
 import com.olia.processflyer.shared.bpmn.template.NodeVisitor;
@@ -27,7 +28,7 @@ import com.olia.processflyer.shared.bpmn.template.element.NodeConnector;
  *
  * @author Philipp Kanne
  */
-public abstract class AbstractBaseNode<NODE_TYPE extends NodeType> implements Node<NODE_TYPE>
+public abstract class AbstractBaseNode<NODE_TYPE extends NodeType> implements Node<NODE_TYPE>, IsSerializable
 {
     private String uniqueIdentifier;
 

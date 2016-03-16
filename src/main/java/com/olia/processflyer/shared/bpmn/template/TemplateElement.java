@@ -12,12 +12,14 @@
  */
 package com.olia.processflyer.shared.bpmn.template;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * A templates element.
  *
  * @author Philipp Kanne
  */
-public interface TemplateElement
+public interface TemplateElement extends IsSerializable
 {
     boolean isNode();
 

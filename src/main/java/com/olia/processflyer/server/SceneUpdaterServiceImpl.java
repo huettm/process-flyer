@@ -1,6 +1,8 @@
 package com.olia.processflyer.server;
 
 import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.olia.processflyer.shared.SceneUpdaterService;
@@ -15,10 +17,13 @@ public class SceneUpdaterServiceImpl extends RemoteServiceServlet  implements Sc
 
 	private HackathonDungleMock mock=new HackathonDungleMock();
 	
+	private static Logger LOG = Logger.getLogger("SceneUpdaterServiceImpl");
+	
 	@Override
-	public Collection<ProcessInstanceImpl> getProcessInstances() {
+	public ProcessInstanceImpl[] getProcessInstances() {
 		Collection<ProcessInstanceImpl> myPis= mock.createDungle(1);
-		return myPis;
+		LOG.log(Level.FINE	, "ProcFlyer scene updater.");
+		return  myPis.toArray(new ProcessInstanceImpl[myPis.size()]);
 	}
 
 }

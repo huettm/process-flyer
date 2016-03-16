@@ -13,13 +13,14 @@
 package com.olia.processflyer.shared.bpmn.template;
 
 import com.google.gwt.dev.protobuf.DescriptorProtos.FieldDescriptorProto.Label;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * Attaches a label to a node.
  *
  * @author Philipp Kanne
  */
-public interface Markable
+public interface Markable extends IsSerializable
 {
     /**
      * The label.

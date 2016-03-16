@@ -12,17 +12,19 @@
  */
 package com.olia.processflyer.shared.bpmn.template;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * Marks an object as identfiable.
  *
  * @author Philipp Kanne
  */
-public interface Identifiable
+public interface Identifiable extends IsSerializable
 {
     /**
      * A unique identifier
      * 
      * @return
      */
-    String getUniqueIdentifier();
+   String getUniqueIdentifier();
 }

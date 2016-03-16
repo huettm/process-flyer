@@ -12,95 +12,81 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl.dsl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Point;
 import com.olia.processflyer.shared.bpmn.template.RenderingInformation;
 import com.olia.processflyer.shared.bpmn.template.impl.RenderingInformationImpl;
 
-import javafx.geometry.Point3D;
+import java.util.List;
 
 /**
  * DOCME
  *
  * @author Philipp Kanne
  */
-public class RenderInformationBuilder
-{
-    private RenderingInformationImpl data;
+public class RenderInformationBuilder implements IsSerializable {
+	private RenderingInformationImpl data;
 
-    private RenderInformationBuilder()
-    {
-        data = new RenderingInformationImpl();
-    }
+	public RenderInformationBuilder() {
+		data = new RenderingInformationImpl();
+	}
 
-    public static RenderInformationBuilder Render()
-    {
-        return new RenderInformationBuilder();
-    }
+	public static RenderInformationBuilder Render() {
+		return new RenderInformationBuilder();
+	}
 
-    public RenderInformationBuilder addWayPoint(double x, double y, double z)
-    {
-        data.getWayPoints().add(new Point(x, y, z));
-        return this;
-    }
+	public RenderInformationBuilder addWayPoint(double x, double y, double z) {
+		data.getWayPoints().add(new Point(x, y, z));
+		return this;
+	}
 
-    public RenderInformationBuilder startPosition(double x, double y, double z)
-    {
-        data.setStartPosition(new Point(x, y, z));
-        return this;
-    }
+	public RenderInformationBuilder addWayPoints(List<Point> points) {
+		data.getWayPoints().addAll(points);
+		return this;
+	}
 
-    public RenderInformationBuilder endPosition(double x, double y, double z)
-    {
-        data.setEndPosition(new Point(x, y, z));
+	public RenderInformationBuilder startPosition(double x, double y, double z) {
+		data.setStartPosition(new Point(x, y, z));
+		return this;
+	}
 
-        Point subtracted = data.getEndPosition().subtract(data.getStartPosition());
+	public RenderInformationBuilder endPosition(double x, double y, double z) {
+		data.setEndPosition(new Point(x, y, z));
+		return this;
+	}
 
-        data.setWidth(subtracted.getX());
-        data.setHeight(subtracted.getY());
-        data.setDepth(subtracted.getZ());
+	public RenderInformationBuilder width(double width) {
+		data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point(width, 0, 0)));
 
-        return this;
-    }
+		return this;
+	}
 
-    public RenderInformationBuilder width(double width)
-    {
-        data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point(width, 0, 0)));
-        data.setWidth(width);
+	public RenderInformationBuilder height(double height) {
+		data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point(0, height, 0)));
 
-        return this;
-    }
+		return this;
+	}
 
-    public RenderInformationBuilder height(double height)
-    {
-        data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point(0, height, 0)));
-        data.setHeight(height);
+	public RenderInformationBuilder depth(double depth) {
+		data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point(0, 0, depth)));
 
-        return this;
-    }
+		return this;
+	}
 
-    public RenderInformationBuilder depth(double depth)
-    {
-        data.setEndPosition(getEndPositionOrCreateFromStartPosition().add(new Point(0, 0, depth)));
-        data.setDepth(depth);
+	private Point getEndPositionOrCreateFromStartPosition() {
+		Point endPosition = data.getEndPosition();
+		if (endPosition == null) {
+			Point start = data.getStartPosition();
+			data.setEndPosition(new Point(start.getX(), start.getY(), start.getZ()));
+			endPosition = data.getEndPosition();
+		}
+		return endPosition;
+	}
 
-        return this;
-    }
+	public RenderingInformation getData() {
+		data.calculateStartAndEndFromWaypoints();
 
-    private Point getEndPositionOrCreateFromStartPosition()
-    {
-    	Point endPosition = data.getEndPosition();
-        if (endPosition == null)
-        {
-        	Point start = data.getStartPosition();
-            data.setEndPosition(new Point(start.getX(), start.getY(), start.getZ()));
-            endPosition = data.getEndPosition();
-        }
-        return endPosition;
-    }
-
-    public RenderingInformation getData()
-    {
-        return data;
-    }
+		return data;
+	}
 
 }

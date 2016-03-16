@@ -16,6 +16,7 @@ import static com.olia.processflyer.shared.bpmn.instance.impl.InstanceStatusImpl
 
 import java.util.Properties;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.instance.InstanceStatus;
 import com.olia.processflyer.shared.bpmn.instance.InstanceStatusType;
 import com.olia.processflyer.shared.bpmn.instance.NodeInstance;
@@ -27,17 +28,19 @@ import com.olia.processflyer.shared.bpmn.template.NodeType;
  *
  * @author Philipp Kanne
  */
-public class NodeInstanceImpl implements NodeInstance
+public class NodeInstanceImpl implements NodeInstance, IsSerializable
 {
 
-    private final Node<? extends NodeType> node;
+    private Node<? extends NodeType> node=null;
 
-    private InstanceStatus status;
+    private InstanceStatus status=null;
 
-    private Properties properties;
+    private Properties properties=null;
 
-    private String uniqueIdentifier;
+    private String uniqueIdentifier=null;
 
+    NodeInstanceImpl(){}
+    
     public NodeInstanceImpl(Node<? extends NodeType> node, String uniqueIdentifier)
     {
         this.node = node;

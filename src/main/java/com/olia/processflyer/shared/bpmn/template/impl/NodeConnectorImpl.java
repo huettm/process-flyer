@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.impl;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Node;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
 import com.olia.processflyer.shared.bpmn.template.NodeVisitor;
@@ -25,125 +26,104 @@ import com.olia.processflyer.shared.bpmn.template.element.NodeConnectorType;
  *
  * @author Philipp Kanne
  */
-public class NodeConnectorImpl implements NodeConnector
+public class NodeConnectorImpl implements NodeConnector, IsSerializable
 {
+	private String uniqueIdentifier;
 
-    private String uniqueIdentifier;
+	private Node<? extends NodeType> endNode;
 
-    private Node<? extends NodeType> endNode;
+	private Node<? extends NodeType> startNode;
 
-    private Node<? extends NodeType> startNode;
+	private Label label;
 
-    private Label label;
+	private RenderingInformation renderingData;
 
-    private RenderingInformation renderingData;
+	public NodeConnectorImpl() {
+		super();
+	}
 
-    public NodeConnectorImpl()
-    {
-        super();
-    }
+	@Override
+	public String getUniqueIdentifier() {
+		return uniqueIdentifier;
+	}
 
-    @Override
-    public String getUniqueIdentifier()
-    {
-        return uniqueIdentifier;
-    }
+	public void setUniqueIdentifier(String uniqueIdentifier) {
+		this.uniqueIdentifier = uniqueIdentifier;
+	}
 
-    public void setUniqueIdentifier(String uniqueIdentifier)
-    {
-        this.uniqueIdentifier = uniqueIdentifier;
-    }
+	@Override
+	public Label getLabel() {
+		return label;
+	}
 
-    @Override
-    public Label getLabel()
-    {
-        return label;
-    }
+	public void setLabel(Label label) {
+		this.label = label;
+	}
 
-    public void setLabel(Label label)
-    {
-        this.label = label;
-    }
+	@Override
+	public RenderingInformation getRenderingData() {
+		return renderingData;
+	}
 
-    @Override
-    public RenderingInformation getRenderingData()
-    {
-        return renderingData;
-    }
+	public void setRenderingData(RenderingInformation renderingData) {
+		this.renderingData = renderingData;
+	}
 
-    public void setRenderingData(RenderingInformation renderingData)
-    {
-        this.renderingData = renderingData;
-    }
+	@Override
+	public Node<? extends NodeType> getStartNode() {
+		return startNode;
+	}
 
-    @Override
-    public Node<? extends NodeType> getStartNode()
-    {
-        return startNode;
-    }
+	@Override
+	public Node<? extends NodeType> getEndNode() {
+		return endNode;
+	}
 
-    @Override
-    public Node<? extends NodeType> getEndNode()
-    {
-        return endNode;
-    }
+	@Override
+	public NodeConnectorType getType() {
+		return NodeConnectorType.Default;
+	}
 
-    @Override
-    public NodeConnectorType getType()
-    {
-        return NodeConnectorType.Default;
-    }
+	public void setEndNode(Node<? extends NodeType> endNode) {
+		this.endNode = endNode;
+	}
 
-    public void setEndNode(Node<? extends NodeType> endNode)
-    {
-        this.endNode = endNode;
-    }
+	public void setStartNode(Node<? extends NodeType> startNode) {
+		this.startNode = startNode;
+	}
 
-    public void setStartNode(Node<? extends NodeType> startNode)
-    {
-        this.startNode = startNode;
-    }
+	@Override
+	public void accept(NodeVisitor visitor) {
+		visitor.visit(this);
+		if (label != null) {
+			label.accept(visitor);
+		}
+	}
 
-    @Override
-    public void accept(NodeVisitor visitor)
-    {
-        visitor.visit(this);
-    }
+	@Override
+	public String toString() {
+		return "Connector [uniqueIdentifier=" + uniqueIdentifier + ", startNode=" + startNode + ", endNode=" + endNode
+				+ "]";
+	}
 
-    @Override
-    public String toString()
-    {
-        return "Connector [uniqueIdentifier="
-                + uniqueIdentifier
-                + ", startNode="
-                + startNode
-                + ", endNode="
-                + endNode
-                + "]";
-    }
+	@Override
+	public boolean isNode() {
+		return false;
+	}
 
-    @Override
-    public boolean isNode()
-    {
-        return false;
-    }
+	@Override
+	public boolean isConnector() {
+		return true;
+	}
 
-    @Override
-    public boolean isConnector()
-    {
-        return true;
-    }
+	@Override
+	public boolean isStartNode() {
+		return false;
+	}
 
-    @Override
-    public boolean isStartNode()
-    {
-        return false;
-    }
-
-    @Override
-    public boolean isEndNode()
-    {
-        return false;
-    }
+	@Override
+	public boolean isEndNode() {
+		return false;
+	}
 
 }

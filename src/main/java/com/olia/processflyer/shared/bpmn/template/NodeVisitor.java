@@ -12,12 +12,14 @@
  */
 package com.olia.processflyer.shared.bpmn.template;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * DOCME
  *
  * @author Philipp Kanne
  */
-public interface NodeVisitor
+public interface NodeVisitor extends IsSerializable
 {
     public void visit(TemplateElement theElement);
 }

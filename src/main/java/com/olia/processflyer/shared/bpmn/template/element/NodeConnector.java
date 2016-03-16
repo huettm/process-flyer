@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.element;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.Identifiable;
 import com.olia.processflyer.shared.bpmn.template.Markable;
 import com.olia.processflyer.shared.bpmn.template.Node;
@@ -24,7 +25,7 @@ import com.olia.processflyer.shared.bpmn.template.Visitable;
  *
  * @author Philipp Kanne
  */
-public interface NodeConnector extends Identifiable, Markable, Renderable, Visitable, TemplateElement
+public interface NodeConnector extends Identifiable, Markable, Renderable, Visitable, TemplateElement, IsSerializable
 {
     Node<?> getStartNode();
 

@@ -12,6 +12,8 @@
  */
 package com.olia.processflyer.shared.bpmn.template;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 import java.util.List;
 
 /**
@@ -19,7 +21,8 @@ import java.util.List;
  *
  * @author Philipp Kanne
  */
-public interface RenderingInformation
+
+public interface RenderingInformation extends IsSerializable
 {
     /**
      * The referenced template element.
@@ -77,5 +80,7 @@ public interface RenderingInformation
      * @return
      */
     double getDepth();
+
+	
 
 }

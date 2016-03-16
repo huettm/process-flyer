@@ -31,14 +31,16 @@ import com.olia.processflyer.shared.bpmn.template.ProcessTemplate;
  */
 public class ProcessInstanceImpl implements ProcessInstance, IsSerializable {
 
-	private final ProcessTemplate processTemplate;
+	private ProcessTemplate processTemplate = null;
 
-	private InstanceStatus state;
+	private InstanceStatus state = null;
 
-	private final String uniqueIdentifier;
+	private String uniqueIdentifier=null;
 
 	private Map<String, NodeInstance> instances = new HashMap<String, NodeInstance>();
 
+	public ProcessInstanceImpl() {}
+	
 	public ProcessInstanceImpl(ProcessTemplate processTemplate, String uniqueIdentifier) {
 		super();
 		this.processTemplate = processTemplate;
@@ -118,6 +120,5 @@ public class ProcessInstanceImpl implements ProcessInstance, IsSerializable {
 		}
 		return true;
 	}
-
 
 }

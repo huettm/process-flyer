@@ -12,6 +12,7 @@
  */
 package com.olia.processflyer.shared.bpmn.template.element;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
 import com.olia.processflyer.shared.bpmn.template.NodeType;
 
 /**
@@ -19,6 +20,6 @@ import com.olia.processflyer.shared.bpmn.template.NodeType;
  *
  * @author Philipp Kanne
  */
-public enum TaskType implements NodeType {
+public enum TaskType implements NodeType , IsSerializable{
     Undefined, Receive, Script, Manual, Receive_instantiated, Service, User, Send, Business_Rule
 }
